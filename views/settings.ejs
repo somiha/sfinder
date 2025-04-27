@@ -1,0 +1,636 @@
+<%- include('partial/header'); -%>
+<nav class="admin-main-menu">
+  <ul>
+    <li>
+      <a href="/admin/dashboard"><img src="/images/icon/users-icon.png" alt="">Dashboard</a>
+    </li>
+    <li>
+      <a href="/admin/user"><img src="/images/icon/users-icon.png" alt="">User List</a>
+    </li>
+    <li>
+      <a href="/admin/banner"><img src="/images/icon/banner-icon.png" alt="">Banners</a>
+    </li>
+    <li>
+      <a href="/admin/app-image"><img src="/images/icon/banner-icon.png" alt="">App Image</a>
+    </li>
+    <li class="active">
+      <a href="/admin/settings"><img src="/images/icon/settings-icon.png" alt="">Settings</a>
+    </li>
+    <li>
+      <a href="/admin/notice"><img src="/images/icon/notification-icon.png" alt="">Notice</a>
+    </li>
+    <li>
+      <a href="/admin/message"><img src="/images/icon/message-icon.png" alt="">Message</a>
+    </li>
+    <li>
+      <a href="/admin/daily-update"><img src="/images/icon/daily-update-icon.png" alt="">Daily Update</a>
+    </li>
+    <li>
+      <a href="/admin/file-request"><img src="/images/icon/banner-icon.png" alt="">File Request</a>
+    </li>
+    <li>
+      <a href="/admin/personal-request"><img src="/images/icon/banner-icon.png" alt="">Personal Request</a>
+    </li>
+    <li>
+      <a href="/admin/ic"><img src="/images/icon/ic-icon.png" alt="">IC</a>
+    </li>
+    <li>
+      <a href="/admin/buy-sell"><img src="/images/icon/buy-sell-icon.png" alt="">Buy & Sell</a>
+    </li>
+    <li>
+      <a href="/admin/shop"><img src="/images/icon/buy-sell-icon.png" alt="">Shop</a>
+    </li>
+    <li>
+      <a href="/admin/order"><img src="/images/icon/order-icon.png" alt="">Orders</a>
+    </li>
+    <li>
+      <a href="/admin/freelancer"><img src="/images/icon/freelancer-icon.png" alt="">Freelancer List</a>
+    </li>
+    <li>
+      <a href="/admin/packages"><img src="/images/icon/message-icon.png" alt="">Packages</a>
+    </li>
+    <li>
+      <a href="/admin/file-system"><img src="/images/icon/notification-icon.png" alt="">File System</a>
+    </li>
+    <li>
+      <a href="/admin/course"><img src="/images/icon/course-icon.png" alt="">Course</a>
+    </li>
+    <li>
+      <a href="/admin/course-instructor"><img src="/images/icon/course-icon.png" alt="">Course Instructor</a>
+    </li>
+    <li>
+      <a href="/admin/course-category"><img src="/images/icon/course-icon.png" alt="">Course Category</a>
+    </li>
+    <li>
+      <a href="/admin/course-enrollment"><img src="/images/icon/course-icon.png" alt="">Course Enrollment</a>
+    </li>
+    <li>
+      <a href="/admin/chat-alert"><img src="/images/icon/course-icon.png" alt="">Chat Alert</a>
+    </li>
+    <li>
+      <a href="/admin/division"><img src="/images/icon/course-icon.png" alt="">Divisions</a>
+    </li>
+    <li>
+      <a href="/admin/district"><img src="/images/icon/course-icon.png" alt="">Districts</a>
+    </li>
+    <li>
+      <a href="/admin/bid-info"><img src="/images/icon/course-icon.png" alt="">Bid Info</a>
+    </li>
+    <li>
+      <a href="/admin/cancel-bid"><img src="/images/icon/course-icon.png" alt="">Cancel Bid</a>
+    </li>
+    <li>
+      <a href="/admin/plan"><img src="/images/icon/course-icon.png" alt="">Boosting Plan</a>
+    </li>
+    <li>
+      <a href="/admin/plan-detail"><img src="/images/icon/course-icon.png" alt="">Boosting Details</a>
+    </li>
+  </ul>
+</nav>
+</div>
+<section class="main-content">
+  <div class="main-content-header">
+    <span class="mobile-menu-icon">
+      <i class="bi bi-list"></i>
+    </span>
+    <div class="main-content-header-top">
+      <div class="admin-info">
+        <img src="/images/admin-user-image.png" alt="">
+        <h6>Admin</h6>
+      </div>
+      <a href="/admin/log-out" class="logout-btn">Logout</a>
+    </div>
+    <div class="main-content-header-bottom">
+      <h4>Settings</h4>
+    </div>
+  </div>
+  <div class="user-content py-5">
+    <div class="settings-info">
+      <div class="settings-info-box">
+        <div class="settings-info-box-header">
+          <h4>Social Media Information</h4>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editSocialMediaInfo">Edit</button>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Facebook Link</h5>
+              <p>
+                <%= social_media_info[0].facebook_link %>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Whatsapp Link</h5>
+              <p>
+                <%= social_media_info[0].whatsapp_link %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="editSocialMediaInfo" tabindex="-1" aria-labelledby="editSocialMediaInfoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Social Media Info</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="add-notification-form">
+                <form action="/admin/edit-social-media-info" method="POST" enctype="multipart/form-data">
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Facebook Link</label>
+                    <input type="text" class="form-control" name="facebook_link"
+                      value="<%= social_media_info[0].facebook_link %>">
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Whatsapp Link</label>
+                    <input type="text" class="form-control" name="whatsapp_link"
+                      value="<%= social_media_info[0].whatsapp_link %>">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-info-box">
+        <div class="settings-info-box-header">
+          <h4>Genaral Information</h4>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editGenaralInfo">Edit</button>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Version Name</h5>
+              <p>
+                <%= general_info[0].version_name %>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Version Url</h5>
+              <p>
+                <%= general_info[0].version_url %>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Multiple Device Allowed</h5>
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="isMultipleDeviceAllowed" value="1" id="allowYes"
+                  <%= general_info[0].isMultipleDeviceAllowed == 1 ? "checked" : "" %>>
+                <label class="form-check-label" for="allowYes">
+                  Yes
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="isMultipleDeviceAllowed" value="0" id="allowNo"
+                  <%= general_info[0].isMultipleDeviceAllowed == 0 ? "checked" : "" %>>
+                <label class="form-check-label" for="allowNo">
+                  No
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-12">
+            <div class="settings-item">
+              <h5>Terms & Policy</h5>
+              <p>
+                <%= general_info[0].terms_policy %>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Home Notification</h5>
+              <p>
+                <%= home_notification[0].notification %>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Freelancer Fee</h5>
+              <p>
+                <%= general_info[0].freelancer_fee %>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Video Instruction</h5>
+              <p><video height="240" width="100%" controls>
+                  <source src="<%= general_info[0].home_video_url %>" type="video/mp4">
+                </video></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="editGenaralInfo" tabindex="-1" aria-labelledby="editGenaralInfoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Genaral Info</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="add-notification-form">
+                <form action="/admin/edit-general-info" method="POST" enctype="multipart/form-data">
+                  <div class="add-notification-form-item form-check form-switch mt-3">
+                    <input class="form-check-input" type="checkbox" id="multipleDeviceSwitch"
+                      name="isMultipleDeviceAllowed" value="1"
+                      <%= general_info[0].isMultipleDeviceAllowed == 1 ? "checked" : "" %>>
+                    <label class="form-check-label" for="multipleDeviceSwitch">Multiple Device Allowed</label>
+                  </div>
+
+
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Terms & Policy</label>
+                    <textarea name="terms_policy_info" id="" rows="10"
+                      class="form-control"><%= general_info[0].terms_policy %></textarea>
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Home Notification</label>
+                    <input type="text" class="form-control" name="home_notification"
+                      value="<%= home_notification[0].notification %>">
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Freelancer Fee</label>
+                    <input type="number" class="form-control" name="freelancer_fee"
+                      value="<%= general_info[0].freelancer_fee %>">
+                  </div>
+
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Version Name</label>
+                    <input type="text" class="form-control" name="version_name"
+                      value="<%= general_info[0].version_name %>">
+                  </div>
+
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Version Url</label>
+                    <input type="text" class="form-control" name="version_url"
+                      value="<%= general_info[0].version_url %>">
+                  </div>
+
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Video Thumbanil</label>
+                    <div class="custom-file-upload mt-2">
+                      <img src="<%= general_info[0].home_video_thumbnail %>" alt="" id="home-video-thumbnail-image"
+                        class="w-100 d-block mb-2">
+                      <div class="custom-file-upload-box">
+                        <i class="bi bi-plus-circle"></i>
+                        <h6>Click here to change video thumbnail</h6>
+                        <input type="file" id="home-video-thumbnail-image-input" name="home_video_thumbnail_image"
+                          onchange="previewFile(this.id)">
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Video Instruction</label>
+                    <div class="custom-file-upload mt-2">
+                      <video height="240" width="100%" controls id="home-video-tag">
+                        <source src="<%= general_info[0].home_video_url %>" id="home-video-source" type="video/mp4">
+                      </video>
+                      <div class="custom-file-upload-box">
+                        <i class="bi bi-plus-circle"></i>
+                        <h6>Click here to change video</h6>
+                        <input type="file" id="home-video-input" name="home_video" onchange="previewVideo(event)">
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-info-box">
+        <div class="settings-info-box-header">
+          <h4>Alert</h4>
+          <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAlert">Add</button> -->
+        </div>
+        <div class="banner-table">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">SL. No</th>
+                  <th scope="col">Alert System</th>
+
+                  <th scope="col">Active</th>
+                  <th scope="col" class="text-end">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i=0 ;i<alert.length ;i++) { %>
+                <tr>
+                  <td>
+                    <%= i+1 %>
+                  </td>
+                  <td>
+                    <%= alert[i].alert_system %>
+                  </td>
+                  <td>
+                    <% if(alert[i].is_active==1){ %>
+                    Yes
+                    <% } else { %>
+                    No
+                    <% } %>
+
+                  </td>
+                  <td>
+                    <div class="table-action-btn justify-content-end">
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#viewAlert<%= alert[i].alert_id %>">
+                        <i class="bi bi-eye-fill"></i>
+                      </a>
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#editAlert<%= alert[i].alert_id %>">
+                        <i class="bi bi-pencil-fill"></i>
+                      </a>
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#deleteAlert<%= alert[i].alert_id %>">
+                        <i class="bi bi-trash-fill"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                <div class="modal fade" id="viewAlert<%= alert[i].alert_id %>" tabindex="-1"
+                  aria-labelledby="viewAlert<%= alert[i].alert_id %>Label" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">View Alert</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="daily-update-info">
+                          <div class="daily-update-item-box">
+                            <h5>Alert System</h5>
+                            <p>
+                              <%= alert[i].alert_system %>
+                            </p>
+                          </div>
+                          <div class="daily-update-item-box">
+                            <h5>Alert Image</h5>
+                            <img src="<%= alert[i].alert_image_url %>" alt="">
+                          </div>
+                          <div class="daily-update-item-box">
+                            <h5>Alert File</h5>
+                            <p>
+                              <a href="<%= alert[i].alert_file_url %>">
+                                File
+                              </a>
+                            </p>
+                          </div>
+                          <div class="daily-update-item-box">
+                            <h5>Alert Active</h5>
+                            <% if(alert[i].is_active==1){ %>
+                            <p>Yes</p>
+                            <% } else { %>
+                            <p>No</p>
+                            <% } %>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade" id="deleteAlert<%= alert[i].alert_id %>" tabindex="-1"
+                  aria-labelledby="deleteAlert<%= alert[i].alert_id %>Label" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Alert</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="add-banner-form">
+                          <h3>Are you want to delete?</h3>
+                        </div>
+                        <a href="/admin/delete-alert/<%= alert[i].alert_id %>" class="btn btn-danger">Delete</a>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade" id="editAlert<%= alert[i].alert_id %>" tabindex="-1"
+                  aria-labelledby="editAlert<%= alert[i].alert_id %>Label" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Alert</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="add-notification-form">
+                          <form action="/admin/edit-alert/<%= alert[i].alert_id %>" method="POST"
+                            enctype="multipart/form-data">
+                            <div class="add-notification-form-item">
+                              <label for="" class="form-label">Alert File</label>
+                              <input type="file" class="form-control" name="alert_file" placeholder="Alert File">
+                            </div>
+                            <div class="add-notification-form-item">
+                              <label for="" class="form-label">Alert Link</label>
+                              <input type="text" class="form-control" name="alert_link" value="<%= alert[i].link %>"
+                                placeholder="Alert Link">
+                            </div>
+                            <div class="add-notification-form-item">
+                              <label for="" class="form-label">Alert Image</label>
+                              <div class="custom-file-upload mt-2">
+                                <img src="<%= alert[i].alert_image_url %>" alt=""
+                                  id="alert-image<%= alert[i].alert_id %>" class="w-100 d-block mb-2">
+                                <div class="custom-file-upload-box">
+                                  <i class="bi bi-plus-circle"></i>
+                                  <h6>Click here to edit alert image</h6>
+                                  <input type="file" id="alert-image-input<%= alert[i].alert_id %>" name="alert_image"
+                                    onchange="previewFile(this.id)">
+                                </div>
+
+                              </div>
+                            </div>
+                            <div class="add-notification-form-item">
+                              <label for="" class="form-label">Is active</label>
+                              <select class="form-select" name="is_active">
+                                <option>Select Status</option>
+                                <option value="1" <%=alert[i].is_active==1 ? 'selected' : '' %>>Active</option>
+                                <option value="0" <%=alert[i].is_active==0 ? 'selected' : '' %>>Non Active</option>
+                              </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="addAlert" tabindex="-1" aria-labelledby="addAlertLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Alert</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="add-notification-form">
+                <form action="/admin/add-alert" method="POST" enctype="multipart/form-data">
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Alert Title</label>
+                    <input type="text" class="form-control" name="alert_title" placeholder="Alert Title">
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Alert Description</label>
+                    <textarea name="alert_description" id="" rows="10" placeholder="Alert Description"
+                      class="form-control"></textarea>
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Alert File</label>
+                    <input type="file" class="form-control" name="alert_file" placeholder="Alert File">
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Alert Image</label>
+                    <div class="custom-file-upload mt-2">
+                      <img src="/images/800_300.png" alt="" id="alert-image" class="w-100 d-block mb-2">
+                      <div class="custom-file-upload-box">
+                        <i class="bi bi-plus-circle"></i>
+                        <h6>Click here to add alert image</h6>
+                        <input type="file" id="alert-image-input" name="alert_image" onchange="previewFile(this.id)">
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Is active</label>
+                    <select class="form-select" name="is_active">
+                      <option>Select Status</option>
+                      <option value="1">Active</option>
+                      <option value="0">Non Active</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-info-box">
+        <div class="settings-info-box-header">
+          <h4>Contact Us Information</h4>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editContactUsInfo">Edit</button>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Email</h5>
+              <p>
+                <%= contact_us_info[0].email %>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Mobile Number</h5>
+              <p>
+                <%= contact_us_info[0].mobile_number %>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="settings-item">
+              <h5>Address</h5>
+              <p>
+                <%= contact_us_info[0].address %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="editContactUsInfo" tabindex="-1" aria-labelledby="editContactUsInfoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Contact Us Info</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="add-notification-form">
+                <form action="/admin/edit-contact-us-info" method="POST" enctype="multipart/form-data">
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Email</label>
+                    <input type="text" class="form-control" name="email" value="<%= contact_us_info[0].email %>">
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Mobile Number</label>
+                    <input type="number" class="form-control" name="mobile_number"
+                      value="<%= contact_us_info[0].mobile_number %>">
+                  </div>
+                  <div class="add-notification-form-item">
+                    <label for="" class="form-label">Address</label>
+                    <input type="text" class="form-control" name="address" value="<%= contact_us_info[0].address %>">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const activeItem = document.querySelector(".active");
+    if (activeItem) {
+      activeItem.scrollIntoView({
+        block: "center"
+      });
+    }
+  });
+</script>
+<%- include('partial/footer'); -%>

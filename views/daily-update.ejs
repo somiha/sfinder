@@ -1,0 +1,350 @@
+<%- include('partial/header'); -%>
+<nav class="admin-main-menu">
+  <ul>
+    <li>
+      <a href="/admin/dashboard"><img src="/images/icon/users-icon.png" alt="">Dashboard</a>
+    </li>
+    <li>
+      <a href="/admin/user"><img src="/images/icon/users-icon.png" alt="">User List</a>
+    </li>
+    <li>
+      <a href="/admin/banner"><img src="/images/icon/banner-icon.png" alt="">Banners</a>
+    </li>
+    <li>
+      <a href="/admin/app-image"><img src="/images/icon/banner-icon.png" alt="">App Image</a>
+    </li>
+    <li>
+      <a href="/admin/settings"><img src="/images/icon/settings-icon.png" alt="">Settings</a>
+    </li>
+    <li>
+      <a href="/admin/notice"><img src="/images/icon/notification-icon.png" alt="">Notice</a>
+    </li>
+    <li>
+      <a href="/admin/message"><img src="/images/icon/message-icon.png" alt="">Message</a>
+    </li>
+    <li class="active">
+      <a href="/admin/daily-update"><img src="/images/icon/daily-update-icon.png" alt="">Daily Update</a>
+    </li>
+    <li>
+      <a href="/admin/file-request"><img src="/images/icon/banner-icon.png" alt="">File Request</a>
+    </li>
+    <li>
+      <a href="/admin/personal-request"><img src="/images/icon/banner-icon.png" alt="">Personal Request</a>
+    </li>
+    <li>
+      <a href="/admin/ic"><img src="/images/icon/ic-icon.png" alt="">IC</a>
+    </li>
+    <li>
+      <a href="/admin/buy-sell"><img src="/images/icon/buy-sell-icon.png" alt="">Buy & Sell</a>
+    </li>
+    <li>
+      <a href="/admin/shop"><img src="/images/icon/buy-sell-icon.png" alt="">Shop</a>
+    </li>
+    <li>
+      <a href="/admin/order"><img src="/images/icon/order-icon.png" alt="">Orders</a>
+    </li>
+    <li>
+      <a href="/admin/freelancer"><img src="/images/icon/freelancer-icon.png" alt="">Freelancer List</a>
+    </li>
+    <li>
+      <a href="/admin/packages"><img src="/images/icon/message-icon.png" alt="">Packages</a>
+    </li>
+    <li>
+      <a href="/admin/file-system"><img src="/images/icon/notification-icon.png" alt="">File System</a>
+    </li>
+    <li>
+      <a href="/admin/course"><img src="/images/icon/course-icon.png" alt="">Course</a>
+    </li>
+    <li>
+      <a href="/admin/course-instructor"><img src="/images/icon/course-icon.png" alt="">Course Instructor</a>
+    </li>
+    <li>
+      <a href="/admin/course-category"><img src="/images/icon/course-icon.png" alt="">Course Category</a>
+    </li>
+    <li>
+      <a href="/admin/course-enrollment"><img src="/images/icon/course-icon.png" alt="">Course Enrollment</a>
+    </li>
+    <li>
+      <a href="/admin/chat-alert"><img src="/images/icon/course-icon.png" alt="">Chat Alert</a>
+    </li>
+    <li>
+      <a href="/admin/division"><img src="/images/icon/course-icon.png" alt="">Divisions</a>
+    </li>
+    <li>
+      <a href="/admin/district"><img src="/images/icon/course-icon.png" alt="">Districts</a>
+    </li>
+    <li>
+      <a href="/admin/bid-info"><img src="/images/icon/course-icon.png" alt="">Bid Info</a>
+    </li>
+    <li>
+      <a href="/admin/cancel-bid"><img src="/images/icon/course-icon.png" alt="">Cancel Bid</a>
+    </li>
+    <li>
+      <a href="/admin/plan"><img src="/images/icon/course-icon.png" alt="">Boosting Plan</a>
+    </li>
+    <li>
+      <a href="/admin/plan-detail"><img src="/images/icon/course-icon.png" alt="">Boosting Details</a>
+    </li>
+  </ul>
+</nav>
+</div>
+<section class="main-content">
+  <div class="main-content-header">
+    <span class="mobile-menu-icon">
+      <i class="bi bi-list"></i>
+    </span>
+    <div class="main-content-header-top">
+      <div class="admin-info">
+        <img src="/images/admin-user-image.png" alt="">
+        <h6>Admin</h6>
+      </div>
+      <a href="/admin/log-out" class="logout-btn">Logout</a>
+    </div>
+    <div class="main-content-header-bottom">
+      <h4>Daily Update</h4>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDailyUpdate"><i
+          class="bi bi-plus me-2"></i>Add New</button>
+    </div>
+    <div class="modal fade" id="addDailyUpdate" tabindex="-1" aria-labelledby="addDailyUpdateLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Daily Update</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="add-notification-form">
+              <form action="/admin/add-daily-update" method="POST" enctype="multipart/form-data">
+                <div class="add-notification-form-item">
+                  <label for="" class="form-label">Release Date</label>
+                  <input type="date" class="form-control" name="daily_update_date" placeholder="Notication Date">
+                </div>
+                <div class="add-notification-form-item">
+                  <label for="" class="form-label">Condition</label>
+                  <select class="form-select" name="daily_update_condition">
+                    <option selected>Select Status</option>
+                    <option value="New">New</option>
+                    <option value="Old">Old</option>
+                  </select>
+                </div>
+                <div class="add-notification-form-item">
+                  <label for="" class="form-label">Description</label>
+                  <textarea class="form-control" name="daily_update_description"
+                    placeholder="Daily Update Description"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="user-content py-5">
+    <div class="banner-table">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">S. No</th>
+              <th scope="col">Date</th>
+              <th scope="col">Condition</th>
+              <th scope="col">Description</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i=0;i<paginated.length;i++){ %>
+            <tr>
+              <th scope="row">
+                <%= (page - 1) * perPage + i + 1 %>
+              </th>
+              <td>
+                <%= paginated[i].date %>
+              </td>
+              <td>
+                <%= paginated[i].status %>
+              </td>
+              <td>
+                <%= paginated[i].description %>
+              </td>
+
+              <td>
+                <div class="table-action-btn">
+                  <a href="#" data-bs-toggle="modal"
+                    data-bs-target="#viewDailyUpdate<%= paginated[i].daily_update_id %>">
+                    <i class="bi bi-eye-fill"></i>
+                  </a>
+                  <a href="#" data-bs-toggle="modal"
+                    data-bs-target="#editDailyUpdate<%= paginated[i].daily_update_id %>">
+                    <i class="bi bi-pencil-fill"></i>
+                  </a>
+                  <a href="#" data-bs-toggle="modal"
+                    data-bs-target="#deleteDailyUpdate<%= paginated[i].daily_update_id %>">
+                    <i class="bi bi-trash-fill"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <div class="modal fade" id="viewDailyUpdate<%= paginated[i].daily_update_id %>" tabindex="-1"
+              aria-labelledby="viewDailyUpdate<%= paginated[i].daily_update_id %>Label" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">View Daily Update</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="daily-update-info">
+                      <div class="daily-update-item-box">
+                        <h5>Release Date</h5>
+                        <p>
+                          <%= paginated[i].date %>
+                        </p>
+                      </div>
+                      <div class="daily-update-item-box">
+                        <h5>Condition</h5>
+                        <p>
+                          <%= paginated[i].status %>
+                        </p>
+                      </div>
+                      <div class="daily-update-item-box">
+                        <h5>Description</h5>
+                        <p>
+                          <%= paginated[i].description %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="deleteDailyUpdate<%= paginated[i].daily_update_id %>" tabindex="-1"
+              aria-labelledby="deleteDailyUpdate<%= paginated[i].daily_update_id %>Label" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Daily Update</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="add-banner-form">
+                      <h3>Are you want to delete?</h3>
+                    </div>
+                    <a href="/admin/delete-daily-update/<%= paginated[i].daily_update_id %>"
+                      class="btn btn-danger">Delete</a>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="editDailyUpdate<%= paginated[i].daily_update_id %>" tabindex="-1"
+              aria-labelledby="editDailyUpdate<%= paginated[i].daily_update_id %>Label" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Daily Update</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="add-notification-form">
+                      <form action="/admin/edit-daily-update/<%= paginated[i].daily_update_id %>" method="POST"
+                        enctype="multipart/form-data">
+                        <div class="add-notification-form-item">
+                          <label for="" class="form-label">Release Date</label>
+                          <input type="date" class="form-control" name="daily_update_date"
+                            value="<%= moment(paginated[i].date).format('YYYY-MM-DD') %>">
+                        </div>
+                        <div class="add-notification-form-item">
+                          <label for="" class="form-label">Condition</label>
+                          <select class="form-select" name="daily_update_condition">
+                            <option selected>Select Status</option>
+                            <option value="New" <%=paginated[i].status=='New' ? 'selected' : '' %>>New</option>
+                            <option value="Old" <%=paginated[i].status=='Old' ? 'selected' : '' %>>Old</option>
+                          </select>
+                        </div>
+                        <div class="add-notification-form-item">
+                          <label for="" class="form-label">Description</label>
+                          <textarea class="form-control"
+                            name="daily_update_description"><%= paginated[i].description %></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Page Select -->
+
+    <div class="d-flex flex-column flex-xl-row align-items-center justify-content-between gap-3 py-4">
+      <p class="text-center text-muted small mb-0">
+        Show <%= paginated.length %> from <%= daily_update.length %> Daily Update
+      </p>
+
+      <div class="d-flex gap-2 align-items-center">
+        <!-- Previous Button -->
+        <% if (page > 1) { %>
+        <a class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center"
+          href="/admin/daily-update?page=<%= page - 1 %>">
+          <svg width="8" height="10" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.125 0.75L0.875 7L7.125 13.25" stroke="#84818A" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
+        <% } %>
+
+        <!-- Page Numbers -->
+        <% 
+                                const maxPagesToShow = 8; 
+                                const startPage = Math.max(1, page - Math.floor(maxPagesToShow / 2)); 
+                                const endPage = Math.min(Math.ceil(daily_update.length / perPage), startPage + maxPagesToShow - 1); 
+                                for (let i = startPage; i <= endPage; i++) { 
+                              %>
+        <a class="btn btn-sm <%= i === page ? 'btn-primary' : 'btn-outline-secondary' %>"
+          href="/admin/daily-update?page=<%= i %>">
+          <%= i %>
+        </a>
+        <% } %>
+
+        <!-- Next Button -->
+        <% if (page < Math.ceil(daily_update.length / perPage)) { %>
+        <a class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center"
+          href="/admin/daily-update?page=<%= page + 1 %>">
+          <svg width="8" height="10" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.875 0.75L7.125 7L0.875 13.25" stroke="#84818A" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const activeItem = document.querySelector(".active");
+    if (activeItem) {
+      activeItem.scrollIntoView({
+        block: "center"
+      });
+    }
+  });
+</script>
+<%- include('partial/footer'); -%>

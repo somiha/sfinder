@@ -1,0 +1,211 @@
+<%- include('partial/header'); -%>
+<nav class="admin-main-menu">
+  <ul>
+    <li>
+      <a href="/admin/dashboard"><img src="/images/icon/users-icon.png" alt="">Dashboard</a>
+    </li>
+    <li>
+      <a href="/admin/user"><img src="/images/icon/users-icon.png" alt="">User List</a>
+    </li>
+    <li>
+      <a href="/admin/banner"><img src="/images/icon/banner-icon.png" alt="">Banners</a>
+    </li>
+    <li>
+      <a href="/admin/app-image"><img src="/images/icon/banner-icon.png" alt="">App Image</a>
+    </li>
+    <li>
+      <a href="/admin/settings"><img src="/images/icon/settings-icon.png" alt="">Settings</a>
+    </li>
+    <li>
+      <a href="/admin/notice"><img src="/images/icon/notification-icon.png" alt="">Notice</a>
+    </li>
+    <li>
+      <a href="/admin/message"><img src="/images/icon/message-icon.png" alt="">Message</a>
+    </li>
+    <li>
+      <a href="/admin/daily-update"><img src="/images/icon/daily-update-icon.png" alt="">Daily Update</a>
+    </li>
+    <li>
+      <a href="/admin/file-request"><img src="/images/icon/banner-icon.png" alt="">File Request</a>
+    </li>
+    <li>
+      <a href="/admin/personal-request"><img src="/images/icon/banner-icon.png" alt="">Personal Request</a>
+    </li>
+    <li>
+      <a href="/admin/ic"><img src="/images/icon/ic-icon.png" alt="">IC</a>
+    </li>
+    <li>
+      <a href="/admin/buy-sell"><img src="/images/icon/buy-sell-icon.png" alt="">Buy & Sell</a>
+    </li>
+    <li>
+      <a href="/admin/shop"><img src="/images/icon/buy-sell-icon.png" alt="">Shop</a>
+    </li>
+    <li>
+      <a href="/admin/order"><img src="/images/icon/order-icon.png" alt="">Orders</a>
+    </li>
+    <li>
+      <a href="/admin/freelancer"><img src="/images/icon/freelancer-icon.png" alt="">Freelancer List</a>
+    </li>
+    <li>
+      <a href="/admin/packages"><img src="/images/icon/message-icon.png" alt="">Packages</a>
+    </li>
+    <li>
+      <a href="/admin/file-system"><img src="/images/icon/notification-icon.png" alt="">File System</a>
+    </li>
+    <li class="active">
+      <a href="/admin/course"><img src="/images/icon/course-icon.png" alt="">Course</a>
+    </li>
+    <li>
+      <a href="/admin/course-instructor"><img src="/images/icon/course-icon.png" alt="">Course Instructor</a>
+    </li>
+    <li>
+      <a href="/admin/course-category"><img src="/images/icon/course-icon.png" alt="">Course Category</a>
+    </li>
+    <li>
+      <a href="/admin/course-enrollment"><img src="/images/icon/course-icon.png" alt="">Course Enrollment</a>
+    </li>
+    <li>
+      <a href="/admin/chat-alert"><img src="/images/icon/course-icon.png" alt="">Chat Alert</a>
+    </li>
+    <li>
+      <a href="/admin/division"><img src="/images/icon/course-icon.png" alt="">Divisions</a>
+    </li>
+    <li>
+      <a href="/admin/district"><img src="/images/icon/course-icon.png" alt="">Districts</a>
+    </li>
+    <li>
+      <a href="/admin/bid-info"><img src="/images/icon/course-icon.png" alt="">Bid Info</a>
+    </li>
+    <li>
+      <a href="/admin/cancel-bid"><img src="/images/icon/course-icon.png" alt="">Cancel Bid</a>
+    </li>
+    <li>
+      <a href="/admin/plan"><img src="/images/icon/course-icon.png" alt="">Boosting Plan</a>
+    </li>
+    <li>
+      <a href="/admin/plan-detail"><img src="/images/icon/course-icon.png" alt="">Boosting Details</a>
+    </li>
+
+  </ul>
+</nav>
+</div>
+<section class="main-content">
+  <div class="main-content-header">
+    <span class="mobile-menu-icon">
+      <i class="bi bi-list"></i>
+    </span>
+    <div class="main-content-header-top">
+      <div class="admin-info">
+        <img src="/images/admin-user-image.png" alt="">
+        <h6>Admin</h6>
+      </div>
+      <a href="/admin/log-out" class="logout-btn">Logout</a>
+    </div>
+    <div class="main-content-header-bottom">
+      <h4>Add Course</h4>
+    </div>
+  </div>
+  <div class="user-content py-5">
+    <form action="/admin/add-course" method="POST" enctype="multipart/form-data">
+      <div class="add-course">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Course Name</label>
+              <input type="text" class="form-control" name="course_name" placeholder="Course Name">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Course Category</label>
+              <select class="form-select" name="course_cat">
+                <option disabled selected>Select Category</option>
+                <% for(let i=0 ; i<course_cat.length;i++){ %>
+                <option value="<%= course_cat[i].course_category_id %>">
+                  <%= course_cat[i].course_category_name %>
+                </option>
+                <% } %>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Course Price</label>
+              <input type="text" class="form-control" name="course_price" placeholder="Course Price">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Course Instructor</label>
+              <select class="form-select" name="course_instructor">
+                <option disabled selected>Select Instructor</option>
+                <% for(let i=0 ; i<course_instructor.length;i++){ %>
+                <option value="<%= course_instructor[i].course_instructor_id %>">
+                  <%= course_instructor[i].course_instructor_name %>
+                </option>
+                <% } %>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Course Cover Photo</label>
+              <div class="custom-file-upload mb-5">
+                <img src="/images/800_300.png" class="mb-4" alt="" id="course-cover-image" />
+                <div class="custom-file-upload-box">
+                  <i class="bi bi-plus-circle"></i>
+                  <h6>Click here to upload File</h6>
+                  <input type="file" id="course-cover-image-input" name="course_cover_image"
+                    onchange="previewFile(this.id)" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Course Description</label>
+              <textarea class="form-control" name="course_description" id="" rows="5"
+                placeholder="Course Description"></textarea>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Course Enrollment</label>
+              <input type="number" class="form-control" name="course_enrollment" placeholder="Course Enrollment">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Course Time</label>
+              <input type="text" class="form-control" name="course_time" placeholder="Course Time">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Total Video</label>
+              <input type="number" class="form-control" name="course_video" placeholder="Course Total Video">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="add-notification-form-item">
+              <label for="" class="form-label">Total Pdf</label>
+              <input type="number" class="form-control" name="course_pdf" placeholder="Course Total Pdf">
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </form>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const activeItem = document.querySelector(".active");
+    if (activeItem) {
+      activeItem.scrollIntoView({
+        block: "center"
+      });
+    }
+  });
+</script>
+<%- include('partial/footer'); -%>

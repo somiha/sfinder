@@ -1,0 +1,183 @@
+<%- include('partial/header'); -%>
+
+<nav class="admin-main-menu">
+  <ul>
+    <li>
+      <a href="/admin/dashboard"><img src="/images/icon/users-icon.png" alt="">Dashboard</a>
+    </li>
+    <li class="active">
+      <a href="/admin/user"><img src="/images/icon/users-icon.png" alt="">User List</a>
+    </li>
+    <li>
+      <a href="/admin/banner"><img src="/images/icon/banner-icon.png" alt="">Banners</a>
+    </li>
+    <li>
+      <a href="/admin/app-image"><img src="/images/icon/banner-icon.png" alt="">App Image</a>
+    </li>
+    <li>
+      <a href="/admin/settings"><img src="/images/icon/settings-icon.png" alt="">Settings</a>
+    </li>
+    <li>
+      <a href="/admin/notice"><img src="/images/icon/notification-icon.png" alt="">Notice</a>
+    </li>
+    <li>
+      <a href="/admin/message"><img src="/images/icon/message-icon.png" alt="">Message</a>
+    </li>
+    <li>
+      <a href="/admin/daily-update"><img src="/images/icon/daily-update-icon.png" alt="">Daily Update</a>
+    </li>
+    <li>
+      <a href="/admin/file-request"><img src="/images/icon/banner-icon.png" alt="">File Request</a>
+    </li>
+    <li>
+      <a href="/admin/personal-request"><img src="/images/icon/banner-icon.png" alt="">Personal Request</a>
+    </li>
+    <li>
+      <a href="/admin/ic"><img src="/images/icon/ic-icon.png" alt="">IC</a>
+    </li>
+    <li>
+      <a href="/admin/buy-sell"><img src="/images/icon/buy-sell-icon.png" alt="">Buy & Sell</a>
+    </li>
+    <li>
+      <a href="/admin/shop"><img src="/images/icon/buy-sell-icon.png" alt="">Shop</a>
+    </li>
+    <li>
+      <a href="/admin/order"><img src="/images/icon/order-icon.png" alt="">Orders</a>
+    </li>
+    <li>
+      <a href="/admin/freelancer"><img src="/images/icon/freelancer-icon.png" alt="">Freelancer List</a>
+    </li>
+    <li>
+      <a href="/admin/packages"><img src="/images/icon/message-icon.png" alt="">Packages</a>
+    </li>
+    <li>
+      <a href="/admin/file-system"><img src="/images/icon/notification-icon.png" alt="">File System</a>
+    </li>
+    <li>
+      <a href="/admin/course"><img src="/images/icon/course-icon.png" alt="">Course</a>
+    </li>
+    <li>
+      <a href="/admin/course-instructor"><img src="/images/icon/course-icon.png" alt="">Course Instructor</a>
+    </li>
+    <li>
+      <a href="/admin/course-category"><img src="/images/icon/course-icon.png" alt="">Course Category</a>
+    </li>
+    <li>
+      <a href="/admin/course-enrollment"><img src="/images/icon/course-icon.png" alt="">Course Enrollment</a>
+    </li>
+    <li>
+      <a href="/admin/chat-alert"><img src="/images/icon/course-icon.png" alt="">Chat Alert</a>
+    </li>
+    <li>
+      <a href="/admin/division"><img src="/images/icon/course-icon.png" alt="">Divisions</a>
+    </li>
+    <li>
+      <a href="/admin/district"><img src="/images/icon/course-icon.png" alt="">Districts</a>
+    </li>
+    <li>
+      <a href="/admin/bid-info"><img src="/images/icon/course-icon.png" alt="">Bid Info</a>
+    </li>
+    <li>
+      <a href="/admin/cancel-bid"><img src="/images/icon/course-icon.png" alt="">Cancel Bid</a>
+    </li>
+    <li>
+      <a href="/admin/plan"><img src="/images/icon/course-icon.png" alt="">Boosting Plan</a>
+    </li>
+    <li>
+      <a href="/admin/plan-detail"><img src="/images/icon/course-icon.png" alt="">Boosting Details</a>
+    </li>
+  </ul>
+</nav>
+</div>
+<section class="main-content">
+  <div class="main-content-header">
+    <span class="mobile-menu-icon">
+      <i class="bi bi-list"></i>
+    </span>
+    <div class="main-content-header-top">
+      <div class="admin-info">
+        <img src="/images/admin-user-image.png" alt="">
+        <h6>Admin</h6>
+      </div>
+      <a href="/admin/log-out" class="logout-btn">Logout</a>
+    </div>
+    <div class="main-content-header-bottom">
+      <h4>User Report Details</h4>
+    </div>
+  </div>
+  <div class="user-content py-5">
+    <div class="user-info">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="user-info-item">
+            <h4>User Name</h4>
+            <p>
+              <%= user_info[0].user_name %>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="user-info-item">
+            <h4>Freelancer Number</h4>
+            <p>
+              A-<%= freelancer_info[0].freelancer_id %>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="user-info-item">
+            <h4>Freelancer Name</h4>
+            <p>
+              <%= freelancer_info[0].freelancer_name %>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="user-info-item">
+            <h4>Name</h4>
+            <p>
+              <%= user_report_details[0].name %>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="user-info-item">
+            <h4>Subject</h4>
+            <p>
+              <%= user_report_details[0].subject %>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="user-info-item">
+            <h4>Description</h4>
+            <p>
+              <%= user_report_details[0].description %>
+            </p>
+          </div>
+        </div>
+        <% for(let i=0;i<user_report_photo.length;i++) { %>
+        <div class="col-md-6">
+          <div class="user-info-item">
+            <img src="<%= user_report_photo[i].photo_url %>" alt="" class="w-100 d-block">
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const activeItem = document.querySelector(".active");
+    if (activeItem) {
+      activeItem.scrollIntoView({
+        block: "center"
+      });
+    }
+  });
+</script>
+<%- include('partial/footer'); -%>

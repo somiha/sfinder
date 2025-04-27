@@ -1,0 +1,267 @@
+<%- include('partial/header'); -%>
+<nav class="admin-main-menu">
+  <ul>
+    <li>
+      <a href="/admin/dashboard"><img src="/images/icon/users-icon.png" alt="">Dashboard</a>
+    </li>
+    <li>
+      <a href="/admin/user"><img src="/images/icon/users-icon.png" alt="">User List</a>
+    </li>
+    <li>
+      <a href="/admin/banner"><img src="/images/icon/banner-icon.png" alt="">Banners</a>
+    </li>
+    <li>
+      <a href="/admin/app-image"><img src="/images/icon/banner-icon.png" alt="">App Image</a>
+    </li>
+    <li>
+      <a href="/admin/settings"><img src="/images/icon/settings-icon.png" alt="">Settings</a>
+    </li>
+    <li>
+      <a href="/admin/notice"><img src="/images/icon/notification-icon.png" alt="">Notice</a>
+    </li>
+    <li>
+      <a href="/admin/message"><img src="/images/icon/message-icon.png" alt="">Message</a>
+    </li>
+    <li>
+      <a href="/admin/daily-update"><img src="/images/icon/daily-update-icon.png" alt="">Daily Update</a>
+    </li>
+    <li>
+      <a href="/admin/file-request"><img src="/images/icon/banner-icon.png" alt="">File Request</a>
+    </li>
+    <li>
+      <a href="/admin/personal-request"><img src="/images/icon/banner-icon.png" alt="">Personal Request</a>
+    </li>
+    <li>
+      <a href="/admin/ic"><img src="/images/icon/ic-icon.png" alt="">IC</a>
+    </li>
+    <li>
+      <a href="/admin/buy-sell"><img src="/images/icon/buy-sell-icon.png" alt="">Buy & Sell</a>
+    </li>
+    <li>
+      <a href="/admin/shop"><img src="/images/icon/buy-sell-icon.png" alt="">Shop</a>
+    </li>
+    <li>
+      <a href="/admin/order"><img src="/images/icon/order-icon.png" alt="">Orders</a>
+    </li>
+    <li>
+      <a href="/admin/freelancer"><img src="/images/icon/freelancer-icon.png" alt="">Freelancer List</a>
+    </li>
+    <li>
+      <a href="/admin/packages"><img src="/images/icon/message-icon.png" alt="">Packages</a>
+    </li>
+    <li class="active">
+      <a href="/admin/file-system"><img src="/images/icon/notification-icon.png" alt="">File System</a>
+    </li>
+    <li>
+      <a href="/admin/course"><img src="/images/icon/course-icon.png" alt="">Course</a>
+    </li>
+    <li>
+      <a href="/admin/course-instructor"><img src="/images/icon/course-icon.png" alt="">Course Instructor</a>
+    </li>
+    <li>
+      <a href="/admin/course-category"><img src="/images/icon/course-icon.png" alt="">Course Category</a>
+    </li>
+    <li>
+      <a href="/admin/course-enrollment"><img src="/images/icon/course-icon.png" alt="">Course Enrollment</a>
+    </li>
+    <li>
+      <a href="/admin/chat-alert"><img src="/images/icon/course-icon.png" alt="">Chat Alert</a>
+    </li>
+    <li>
+      <a href="/admin/division"><img src="/images/icon/course-icon.png" alt="">Divisions</a>
+    </li>
+    <li>
+      <a href="/admin/district"><img src="/images/icon/course-icon.png" alt="">Districts</a>
+    </li>
+    <li>
+      <a href="/admin/bid-info"><img src="/images/icon/course-icon.png" alt="">Bid Info</a>
+    </li>
+    <li>
+      <a href="/admin/cancel-bid"><img src="/images/icon/course-icon.png" alt="">Cancel Bid</a>
+    </li>
+    <li>
+      <a href="/admin/plan"><img src="/images/icon/course-icon.png" alt="">Boosting Plan</a>
+    </li>
+    <li>
+      <a href="/admin/plan-detail"><img src="/images/icon/course-icon.png" alt="">Boosting Details</a>
+    </li>
+  </ul>
+</nav>
+</div>
+<section class="main-content">
+  <div class="main-content-header">
+    <span class="mobile-menu-icon">
+      <i class="bi bi-list"></i>
+    </span>
+    <div class="main-content-header-top">
+      <div class="admin-info">
+        <img src="/images/admin-user-image.png" alt="">
+        <h6>Admin</h6>
+      </div>
+      <a href="/admin/log-out" class="logout-btn">Logout</a>
+    </div>
+    <div class="main-content-header-bottom">
+      <h4>Mobile Company</h4>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMainFolder"><i
+          class="bi bi-plus me-2"></i>Add
+        Mobile Company</button>
+    </div>
+    <div class="modal fade" id="addMainFolder" tabindex="-1" aria-labelledby="addMainFolderLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Company</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="add-notification-form">
+              <form action="/admin/add-mobile-company" method="POST" enctype="multipart/form-data">
+                <div class="add-notification-form-item">
+                  <label for="" class="form-label">Image</label>
+                  <div class="custom-file-upload mb-5">
+                    <img src="/images/250_250.png" class="mb-4" alt="" id="mobile-company-image" width="100px"
+                      height="100px" />
+                    <div class="custom-file-upload-box">
+                      <i class="bi bi-plus-circle"></i>
+                      <h6>Click here to upload File</h6>
+                      <input type="file" id="mobile-company-image-input" name="mobile_company_image"
+                        onchange="previewFile(this.id)">
+                    </div>
+                  </div>
+                </div>
+                <div class="add-notification-form-item">
+                  <label for="" class="form-label">Mobile Company Name</label>
+                  <input type="text" class="form-control" name="mobile_company_name" placeholder="Mobile Company Name">
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="user-content pt-3 pb-5">
+    <div class="banner-table">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">S.No</th>
+              <th scope="col">Company Name</th>
+              <th scope="col" class="text-end">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i=0;i<mobile_company.length;i++){ %>
+            <tr>
+              <td>
+                <%= i+1 %>
+              </td>
+              <td>
+                <div class="user-table-user-name">
+                  <img src="<%= mobile_company[i].mobile_company_logo %>" alt="" class="user-image">
+                  <h6>
+                    <%= mobile_company[i].mobile_company_name %>
+                  </h6>
+                </div>
+              </td>
+              <td>
+                <div class="table-action-btn justify-content-end">
+                  <a href="#" data-bs-toggle="modal"
+                    data-bs-target="#editMobileCompany<%= mobile_company[i].mobile_company_id %>">
+                    <i class="bi bi-pencil-fill"></i>
+                  </a>
+                  <% if (mobile_company[i].mobile_company_name != "Exclusive Item'S") { %>
+                  <a href="#" data-bs-toggle="modal"
+                    data-bs-target="#deleteMobileCompany<%= mobile_company[i].mobile_company_id %>">
+                    <i class="bi bi-trash-fill"></i>
+                  </a>
+                  <% } %>
+                  <a href="/admin/main-folder/<%= mobile_company[i].mobile_company_id %>">Main Folder</a>
+                </div>
+              </td>
+            </tr>
+            <div class="modal fade" id="editMobileCompany<%= mobile_company[i].mobile_company_id %>" tabindex="-1"
+              aria-labelledby="editMobileCompany<%= mobile_company[i].mobile_company_id %>Label" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Mobile Company</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="add-notification-form">
+                      <form action="/admin/edit-mobile-company/<%= mobile_company[i].mobile_company_id %>" method="POST"
+                        enctype="multipart/form-data">
+                        <div class="add-notification-form-item">
+                          <label for="" class="form-label">Image</label>
+                          <div class="custom-file-upload mb-5">
+                            <img src="<%= mobile_company[i].mobile_company_logo %>" class="mb-4" alt="" width="100px"
+                              height="100px" id="mobile-company-image<%= mobile_company[i].mobile_company_id %>" />
+                            <div class="custom-file-upload-box">
+                              <i class="bi bi-plus-circle"></i>
+                              <h6>Click here to upload File</h6>
+                              <input type="file"
+                                id="mobile-company-image-input<%= mobile_company[i].mobile_company_id %>"
+                                name="mobile_company_image" onchange="previewFile(this.id)">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="add-notification-form-item">
+                          <label for="" class="form-label">Mobile Company Name</label>
+                          <input type="text" class="form-control" name="mobile_company_name"
+                            value="<%= mobile_company[i].mobile_company_name %>" placeholder="Mobile Company Name">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="deleteMobileCompany<%= mobile_company[i].mobile_company_id %>" tabindex="-1"
+              aria-labelledby="deleteMobileCompany<%= mobile_company[i].mobile_company_id %>Label" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Mobile Company</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="add-banner-form">
+                      <h3>Are you want to delete?</h3>
+                    </div>
+                    <a href="/admin/delete-mobile-company/<%= mobile_company[i].mobile_company_id %>"
+                      class="btn btn-danger">Delete</a>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const activeItem = document.querySelector(".active");
+    if (activeItem) {
+      activeItem.scrollIntoView({
+        block: "center"
+      });
+    }
+  });
+</script>
+<%- include('partial/footer'); -%>
