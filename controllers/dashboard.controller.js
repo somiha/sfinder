@@ -38,7 +38,7 @@ exports.getDashboard = async (req, res) => {
     );
 
     const totalUserReset = await queryAsyncWithoutValue(
-      "SELECT COUNT(*) AS count FROM user_reset INNER JOIN user ON user.user_id=user_reset.user_id ORDER BY user_reset.status"
+      "SELECT COUNT(*) AS count FROM user_reset INNER JOIN user ON user.user_id=user_reset.user_id WHERE user_reset.status =0"
     );
 
     const toalFileRequests = await queryAsyncWithoutValue(
@@ -87,17 +87,21 @@ GROUP BY freelancer_balance_withdraw.freelancer_id, freelancer.freelancer_name;
       `SELECT COUNT(*) AS count FROM package_enrollment as pe
      LEFT JOIN user as u
      ON pe.user_id = u.user_id
-     WHERE created_at < NOW() - INTERVAL 1 YEAR`
+     WHERE created_at > NOW() - INTERVAL 1 YEAR`
     );
 
     const oneYearOveredVerifiedUser = await queryAsyncWithoutValue(
       "SELECT COUNT(*) AS count FROM user WHERE last_verification_date < NOW() - INTERVAL 1 YEAR AND user_verification = 1"
     );
 
+    const courseEnrollment = await queryAsyncWithoutValue(
+      "SELECT COUNT(*) AS count FROM course_enrollment WHERE end_time > NOW() AND is_active = 1"
+    );
+
     const freelancerEnrollments = await queryAsyncWithoutValue(
       `SELECT COUNT(*) AS count FROM freelancer_enrollment
       INNER JOIN freelancer ON freelancer_enrollment.freelancer_id = freelancer.freelancer_id
-      WHERE freelancer.freelancer_acc_status != -1`
+      WHERE freelancer.freelancer_acc_status != -1 AND freelancer_enrollment.status = 0`
     );
 
     const status = req.query.status;
@@ -122,6 +126,7 @@ GROUP BY freelancer_balance_withdraw.freelancer_id, freelancer.freelancer_name;
       subscriptionOveredUsers: subscriptionOveredUsers[0]?.count || 0,
       oneYearOveredVerifiedUser: oneYearOveredVerifiedUser[0]?.count || 0,
       freelancerEnrollments: freelancerEnrollments[0]?.count || 0,
+      courseEnrollment: courseEnrollment[0]?.count || 0,
     });
   } catch (error) {
     console.log(error);

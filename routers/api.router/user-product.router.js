@@ -409,7 +409,7 @@ userProductRouter.get("/user-product-details", (req, res) => {
   let user_id = req.query.user_id;
   let seller_id = req.query.seller_id;
   db.query(
-    "SELECT * FROM user_product LEFT JOIN user_product_sub_category as join2 ON 1 LEFT JOIN division as join3 ON 1 LEFT JOIN district as join4 ON 1 WHERE join2.user_product_sub_category_id=user_product.product_category AND join3.division_id=user_product.location AND join4.district_id=user_product.district AND user_product.user_product_id=?",
+    "SELECT user_product.*, join2.*, join3.*, join4.*, product_sponsor.*, sponsor_plan.name AS plan_name, sponsor_plan.price AS plan_price FROM user_product LEFT JOIN user_product_sub_category AS join2 ON join2.user_product_sub_category_id = user_product.product_category LEFT JOIN division AS join3 ON join3.division_id = user_product.location LEFT JOIN district AS join4 ON join4.district_id = user_product.district LEFT JOIN product_sponsor ON product_sponsor.product_id = user_product.user_product_id LEFT JOIN sponsor_plan ON sponsor_plan.id = product_sponsor.plan_id WHERE user_product.user_product_id = ?",
     [product_id],
     (error, result) => {
       if (!error) {
@@ -434,6 +434,7 @@ userProductRouter.get("/user-product-details", (req, res) => {
                           } else {
                             bid_id = null;
                           }
+
                           res.send({
                             status: "success",
                             message: "Get user product details successfully",

@@ -36,7 +36,7 @@ exports.getAppImage = async (req, res) => {
     const appImage = await queryAsyncWithoutValue(appImageQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = appImage.slice(startIdx, startIdx + perPage);
 

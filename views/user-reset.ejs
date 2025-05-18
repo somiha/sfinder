@@ -1,90 +1,139 @@
 <%- include('partial/header'); -%>
+<style>
+  /* Checkbox styling */
+  #selectAllCheckbox,
+  .user-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
 
+  /* Badge styling */
+  .badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .bg-warning {
+    background-color: #ffc107;
+    color: #212529;
+  }
+
+  .bg-success {
+    background-color: #198754;
+    color: white;
+  }
+
+  /* Flex utilities */
+  .d-flex {
+    display: flex;
+  }
+
+  .align-items-center {
+    align-items: center;
+  }
+
+  .justify-content-between {
+    justify-content: space-between;
+  }
+
+  .gap-2 {
+    gap: 0.5rem;
+  }
+
+  .gap-3 {
+    gap: 1rem;
+  }
+</style>
 <nav class="admin-main-menu">
   <ul>
     <li>
-      <a href="/admin/dashboard"><img src="/images/icon/users-icon.png" alt="">Dashboard</a>
+      <a href="/admin/dashboard"><img src="/images/icon/dashboard.gif" alt="" width="40px">Dashboard</a>
     </li>
     <li class="active">
-      <a href="/admin/user"><img src="/images/icon/users-icon.png" alt="">User List</a>
+      <a href="/admin/user"><img src="/images/icon/user_list.gif" alt="" width="40px">User List</a>
     </li>
     <li>
-      <a href="/admin/banner"><img src="/images/icon/banner-icon.png" alt="">Banners</a>
+      <a href="/admin/banner"><img src="/images/icon/banners.gif" alt="" width="40px">Banners</a>
     </li>
     <li>
-      <a href="/admin/app-image"><img src="/images/icon/banner-icon.png" alt="">App Image</a>
+      <a href="/admin/app-image"><img src="/images/icon/app_image.gif" alt="" width="40px">App Image</a>
     </li>
     <li>
-      <a href="/admin/settings"><img src="/images/icon/settings-icon.png" alt="">Settings</a>
+      <a href="/admin/settings"><img src="/images/icon/settings.gif" alt="" width="40px">Settings</a>
     </li>
     <li>
-      <a href="/admin/notice"><img src="/images/icon/notification-icon.png" alt="">Notice</a>
+      <a href="/admin/notice"><img src="/images/icon/notice.gif" alt="" width="40px">Notice</a>
     </li>
     <li>
-      <a href="/admin/message"><img src="/images/icon/message-icon.png" alt="">Message</a>
+      <a href="/admin/message"><img src="/images/icon/messages.gif" alt="" width="40px">Message</a>
     </li>
     <li>
-      <a href="/admin/daily-update"><img src="/images/icon/daily-update-icon.png" alt="">Daily Update</a>
+      <a href="/admin/daily-update"><img src="/images/icon/update.gif" alt="" width="40px">Daily Update</a>
     </li>
     <li>
-      <a href="/admin/file-request"><img src="/images/icon/banner-icon.png" alt="">File Request</a>
+      <a href="/admin/file-request"><img src="/images/icon/file_request.gif" alt="" width="40px">File Request</a>
     </li>
     <li>
-      <a href="/admin/personal-request"><img src="/images/icon/banner-icon.png" alt="">Personal Request</a>
+      <a href="/admin/personal-request"><img src="/images/icon/personal_requiest.gif" alt="" width="40px">Personal
+        Request</a>
     </li>
     <li>
-      <a href="/admin/ic"><img src="/images/icon/ic-icon.png" alt="">IC</a>
+      <a href="/admin/ic"><img src="/images/icon/ic.gif" alt="" width="40px">IC</a>
     </li>
     <li>
-      <a href="/admin/buy-sell"><img src="/images/icon/buy-sell-icon.png" alt="">Buy & Sell</a>
+      <a href="/admin/buy-sell"><img src="/images/icon/buy_sell.gif" alt="" width="40px">Buy & Sell</a>
     </li>
     <li>
-      <a href="/admin/shop"><img src="/images/icon/buy-sell-icon.png" alt="">Shop</a>
+      <a href="/admin/shop"><img src="/images/icon/shop.gif" alt="" width="40px">Shop</a>
     </li>
     <li>
-      <a href="/admin/order"><img src="/images/icon/order-icon.png" alt="">Orders</a>
+      <a href="/admin/order"><img src="/images/icon/order.gif" alt="" width="40px">Orders</a>
     </li>
     <li>
-      <a href="/admin/freelancer"><img src="/images/icon/freelancer-icon.png" alt="">Freelancer List</a>
+      <a href="/admin/freelancer"><img src="/images/icon/freelancer_list.gif" alt="" width="40px">Freelancer List</a>
     </li>
     <li>
-      <a href="/admin/packages"><img src="/images/icon/message-icon.png" alt="">Packages</a>
+      <a href="/admin/packages"><img src="/images/icon/packages.gif" alt="" width="40px">Packages</a>
     </li>
     <li>
-      <a href="/admin/file-system"><img src="/images/icon/notification-icon.png" alt="">File System</a>
+      <a href="/admin/file-system"><img src="/images/icon/file_system.gif" alt="" width="40px">File System</a>
     </li>
     <li>
-      <a href="/admin/course"><img src="/images/icon/course-icon.png" alt="">Course</a>
+      <a href="/admin/course"><img src="/images/icon/course.gif" alt="" width="40px">Course</a>
     </li>
     <li>
-      <a href="/admin/course-instructor"><img src="/images/icon/course-icon.png" alt="">Course Instructor</a>
+      <a href="/admin/course-instructor"><img src="/images/icon/dashboard.gif" alt="" width="40px">Course Instructor</a>
     </li>
     <li>
-      <a href="/admin/course-category"><img src="/images/icon/course-icon.png" alt="">Course Category</a>
+      <a href="/admin/course-category"><img src="/images/icon/category.gif" alt="" width="40px">Course Category</a>
     </li>
     <li>
-      <a href="/admin/course-enrollment"><img src="/images/icon/course-icon.png" alt="">Course Enrollment</a>
+      <a href="/admin/course-enrollment"><img src="/images/icon/course_enrollment.gif" alt="" width="40px">Course
+        Enrollment</a>
     </li>
     <li>
-      <a href="/admin/chat-alert"><img src="/images/icon/course-icon.png" alt="">Chat Alert</a>
+      <a href="/admin/chat-alert"><img src="/images/icon/chat_alert.gif" alt="" width="40px">Chat Alert</a>
     </li>
     <li>
-      <a href="/admin/division"><img src="/images/icon/course-icon.png" alt="">Divisions</a>
+      <a href="/admin/division"><img src="/images/icon/divisions.gif" alt="" width="40px">Divisions</a>
     </li>
     <li>
-      <a href="/admin/district"><img src="/images/icon/course-icon.png" alt="">Districts</a>
+      <a href="/admin/district"><img src="/images/icon/districts.gif" alt="" width="40px">Districts</a>
     </li>
     <li>
-      <a href="/admin/bid-info"><img src="/images/icon/course-icon.png" alt="">Bid Info</a>
+      <a href="/admin/bid-info"><img src="/images/icon/bid_info.png" alt="" width="30px">Bid Info</a>
     </li>
     <li>
-      <a href="/admin/cancel-bid"><img src="/images/icon/course-icon.png" alt="">Cancel Bid</a>
+      <a href="/admin/cancel-bid"><img src="/images/icon/boosting_details.png" alt="" width="30px">Cancel Bid</a>
     </li>
     <li>
-      <a href="/admin/plan"><img src="/images/icon/course-icon.png" alt="">Boosting Plan</a>
+      <a href="/admin/plan"><img src="/images/icon/boosting_plan.png" alt="" width="30px">Boosting Plan</a>
     </li>
     <li>
-      <a href="/admin/plan-detail"><img src="/images/icon/course-icon.png" alt="">Boosting Details</a>
+      <a href="/admin/plan-detail"><img src="/images/icon/boosting_details.png" alt="" width="30px">Boosting Details</a>
     </li>
   </ul>
 </nav>
@@ -103,132 +152,245 @@
       <a href="/admin/log-out" class="logout-btn">Logout</a>
     </div>
     <div class="main-content-header-bottom">
-      <h4>Users Reset</h4>
+      <h1 class="h3 mb-0 text-gray-800">Users Reset</h1>
+    </div>
+    <div class="main-content-header-search-option">
+      <form action="/admin/search-user-report" method="POST" enctype="multipart/form-data">
+        <input type="text" class="form-control" placeholder="Search By User Email" name="search_user">
+        <button class="btn btn-success" type="submit">Search</button>
+      </form>
     </div>
   </div>
+
   <div class="user-content py-5">
-    <div class="user-list-table">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Serial No</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Device Id</th>
-              <th scope="col">Status</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for (let i=0 ; i<user_reset.length ; i++){ %>
-            <tr>
-              <th scope="row">
-                <%= i+1 %>
-              </th>
-              <td>
-                <div class="user-table-user-name">
-                  <% let imgSrc;
-                        if(user_reset[i].user_image_url){imgSrc=user_reset[i].user_image_url}else{imgSrc="/images/admin-user-image.png"
-                        } %>
-                  <img src="<%= imgSrc %>" alt="" class="user-image">
-                  <h6>
-                    <%= user_reset[i].user_name %>
-                  </h6>
-                </div>
-              </td>
-              <td>
-                <%= user_reset[i].user_email %>
-              </td>
-              <td>
-                <%= user_reset[i].device_id %>
-              </td>
-              <td>
-                <% if(user_reset[i].status==0){ %>
-                Pending
-                <% } else { %>
-                Done
-                <% } %>
-              </td>
-              <td>
-                <div class="table-action-btn">
-                  <% if(user_reset[i].status==0){ %>
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#editUserReset<%= user_reset[i].user_reset_id %>">
-                    <i class="bi bi-pencil-fill"></i>
-                  </a>
-                  <% } %>
-                  <a href="#" data-bs-toggle="modal"
-                    data-bs-target="#deleteUserReset<%= user_reset[i].user_reset_id %>">
-                    <i class="bi bi-trash-fill"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <div class="modal fade" id="editUserReset<%= user_reset[i].user_reset_id %>" tabindex="-1"
-              aria-labelledby="editUserReset<%= user_reset[i].user_reset_id %>Label" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Change User Reset Status</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Main Form for Bulk Actions -->
+    <form id="userResetForm" action="/admin/bulk-reset-users" method="POST">
+      <div class="user-list-table">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"><input type="checkbox" id="selectAllCheckbox"></th>
+                <th scope="col">Serial No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Device Id</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i=0 ; i<paginated.length ; i++){ %>
+              <tr>
+                <td>
+                  <input type="checkbox" name="selectedResets" value="<%= paginated[i].user_reset_id %>"
+                    class="user-checkbox">
+                </td>
+                <th scope="row"><%= i+1 %></th>
+                <td>
+                  <div class="user-table-user-name">
+                    <% let imgSrc = paginated[i].user_image_url || "/images/admin-user-image.png" %>
+                    <img src="<%= imgSrc %>" alt="" class="user-image">
+                    <h6><%= paginated[i].user_name %></h6>
                   </div>
-                  <div class="modal-body">
-                    <div class="add-notification-form">
-                      <form action="/admin/change-user-reset-option/<%= user_reset[i].user_reset_id %>" method="POST"
-                        enctype="multipart/form-data">
-                        <div class="add-notification-form-item">
-                          <label for="" class="form-label">Change Status</label>
-                          <select class="form-select" name="user_reset_status">
-                            <option selected>Change Status</option>
-                            <option value="1">Done</option>
-                          </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                      </form>
-                    </div>
+                </td>
+                <td><%= paginated[i].user_email %></td>
+                <td><%= paginated[i].device_id %></td>
+                <td><%= paginated[i].status==0 ? 'Pending' : 'Done' %></td>
+                <td>
+                  <div class="table-action-btn">
+                    <% if(paginated[i].status==0){ %>
+                    <a href="#" class="edit-reset-btn" data-reset-id="<%= paginated[i].user_reset_id %>"
+                      data-bs-toggle="modal" data-bs-target="#editUserResetModal">
+                      <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <% } %>
+                    <a href="#" data-bs-toggle="modal"
+                      data-bs-target="#deleteUserReset<%= paginated[i].user_reset_id %>">
+                      <i class="bi bi-trash-fill"></i>
+                    </a>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+
+          <!-- Bulk action buttons -->
+          <div class="d-flex gap-2">
+            <button type="button" id="approveSelectedBtn" class="btn btn-success" disabled>Approve Selected</button>
+            <button type="button" id="deleteSelectedBtn" class="btn btn-danger" disabled>Delete Selected</button>
+          </div>
+        </div>
+        <input type="hidden" id="actionType" name="actionType" value="">
+      </div>
+    </form>
+  </div>
+
+  <!-- Single Edit Modal (Outside main form) -->
+  <div class="modal fade" id="editUserResetModal" tabindex="-1" aria-labelledby="editUserResetModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Change User Reset Status</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="singleUserResetForm" method="POST" enctype="multipart/form-data">
+            <div class="add-notification-form-item">
+              <label class="form-label">Change Status</label>
+              <select class="form-select" name="user_reset_status" required>
+                <option value="" selected disabled>Change Status</option>
+                <option value="1">Done</option>
+              </select>
             </div>
-            <div class="modal fade" id="deleteUserReset<%= user_reset[i].user_reset_id %>" tabindex="-1"
-              aria-labelledby="deleteUserReset<%= user_reset[i].user_reset_id %>Label" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete User Reset</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="add-banner-form">
-                      <h3>Are you want to delete?</h3>
-                    </div>
-                    <a href="/admin/delete-user-reset/<%= user_reset[i].user_reset_id %>"
-                      class="btn btn-danger">Delete</a>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <% } %>
-          </tbody>
-        </table>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Delete Modals (One per row) -->
+  <% for (let i=0 ; i<paginated.length ; i++){ %>
+  <div class="modal fade" id="deleteUserReset<%= paginated[i].user_reset_id %>" tabindex="-1"
+    aria-labelledby="deleteUserReset<%= paginated[i].user_reset_id %>Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Delete User Reset</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="add-banner-form">
+            <h3>Are you sure you want to delete?</h3>
+          </div>
+          <a href="/admin/delete-user-reset/<%= paginated[i].user_reset_id %>" class="btn btn-danger">Delete</a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+
+  <!-- Pagination -->
+  <div class="d-flex flex-column flex-xl-row align-items-center justify-content-between gap-3 py-4">
+    <p class="text-center text-muted small mb-0">
+      Show <%= paginated.length %> from <%= user_reset.length %> User Resets
+    </p>
+
+    <div class="d-flex gap-2 align-items-center">
+      <% if (page > 1) { %>
+      <a class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center"
+        href="/admin/user-reset?page=<%= page - 1 %>">
+        <svg width="8" height="10" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.125 0.75L0.875 7L7.125 13.25" stroke="#84818A" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
+      <% } %>
+
+      <% 
+        const maxPagesToShow = 8; 
+        const startPage = Math.max(1, page - Math.floor(maxPagesToShow / 2)); 
+        const endPage = Math.min(Math.ceil(user_reset.length / perPage), startPage + maxPagesToShow - 1); 
+        for (let i = startPage; i <= endPage; i++) { 
+      %>
+      <a class="btn btn-sm <%= i === page ? 'btn-primary' : 'btn-outline-secondary' %>"
+        href="/admin/user-reset?page=<%= i %>">
+        <%= i %>
+      </a>
+      <% } %>
+
+      <% if (page < Math.ceil(user_reset.length / perPage)) { %>
+      <a class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center"
+        href="/admin/user-reset?page=<%= page + 1 %>">
+        <svg width="8" height="10" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.875 0.75L7.125 7L0.875 13.25" stroke="#84818A" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
+      <% } %>
+    </div>
+  </div>
 </section>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const activeItem = document.querySelector(".active");
-    if (activeItem) {
-      activeItem.scrollIntoView({
-        block: "center"
+    // Set active menu item
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.admin-main-menu li').forEach(item => {
+      const link = item.querySelector('a');
+      if (link && link.getAttribute('href') === currentPath) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    // Checkbox functionality
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    const userCheckboxes = document.querySelectorAll('.user-checkbox');
+    const approveSelectedBtn = document.getElementById('approveSelectedBtn');
+    const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+    const userResetForm = document.getElementById('userResetForm');
+    const actionTypeInput = document.getElementById('actionType');
+
+    // Select all functionality
+    selectAllCheckbox.addEventListener('change', function () {
+      const isChecked = this.checked;
+      userCheckboxes.forEach(checkbox => {
+        checkbox.checked = isChecked;
       });
+      updateButtonStates();
+    });
+
+    // Individual checkbox functionality
+    userCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function () {
+        updateButtonStates();
+        if (!this.checked && selectAllCheckbox.checked) {
+          selectAllCheckbox.checked = false;
+        }
+      });
+    });
+
+    // Update button states
+    function updateButtonStates() {
+      const checkedCount = document.querySelectorAll('.user-checkbox:checked').length;
+      approveSelectedBtn.disabled = checkedCount === 0;
+      deleteSelectedBtn.disabled = checkedCount === 0;
     }
+
+    // Bulk actions
+    approveSelectedBtn.addEventListener('click', function () {
+      if (confirm('Are you sure you want to approve the selected resets?')) {
+        actionTypeInput.value = 'approve';
+        userResetForm.submit();
+      }
+    });
+
+    deleteSelectedBtn.addEventListener('click', function () {
+      if (confirm('Are you sure you want to delete the selected resets?')) {
+        actionTypeInput.value = 'delete';
+        userResetForm.submit();
+      }
+    });
+
+    // Dynamic modal form handling
+    document.querySelectorAll('.edit-reset-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const resetId = this.getAttribute('data-reset-id');
+        const form = document.getElementById('singleUserResetForm');
+        form.action = `/admin/change-user-reset-option/${resetId}`;
+      });
+    });
   });
 </script>
 <%- include('partial/footer'); -%>

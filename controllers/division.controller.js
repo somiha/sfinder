@@ -24,7 +24,7 @@ exports.getAllDivisions = async (req, res) => {
     const result = await queryAsyncWithoutValue(query);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 10;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const totalDivisions = result.length;
     const totalPages = Math.ceil(totalDivisions / perPage);

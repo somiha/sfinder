@@ -52,7 +52,7 @@ exports.getPersonalRequest = async (req, res) => {
     const personalRequest = await queryAsyncWithoutValue(personalRequestQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 10;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = personalRequest.slice(startIdx, startIdx + perPage);
 
@@ -101,4 +101,32 @@ exports.changeStauts = (req, res) => {
       }
     }
   );
+};
+
+exports.deleteSelectedRequest = async (req, res) => {
+  try {
+    const selected = req.body.selected;
+
+    if (!selected || !Array.isArray(selected)) {
+      return res.status(400).json({ msg: "No request selected" });
+    }
+
+    // Convert user IDs to integers for safety
+    const ids = selected.map((id) => parseInt(id)).filter((id) => !isNaN(id));
+
+    if (ids.length === 0) {
+      return res.status(400).json({ msg: "No valid IDs provided" });
+    }
+
+    // Delete users in a single query
+    const deleteQuery = `DELETE FROM personal_request_content WHERE personal_request_content_id IN (?)`;
+    await queryAsync(deleteQuery, [ids]);
+
+    req.flash("success", `${ids.length} request deleted successfully`);
+    return res.redirect("/admin/personal-request");
+  } catch (error) {
+    console.log(error);
+
+    return res.redirect("/admin/personal-request");
+  }
 };

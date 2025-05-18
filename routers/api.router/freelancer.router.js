@@ -1911,4 +1911,48 @@ freelancerRouter.get(
   }
 );
 
+freelancerRouter.get("/get-not-reviewed-freelancers", async (req, res) => {
+  try {
+    const freelancers = await queryAsync(
+      "SELECT * FROM freelancer_bid INNER JOIN freelancer ON freelancer.freelancer_id=freelancer_bid.freelancer_id WHERE is_reviewed = 0 AND freelancer_bid.user_id=?",
+      [req.query.user_id]
+    );
+    res.send({
+      status: "success",
+      message: "Get freelancers successfully",
+      freelancer_bid_id: freelancers[0].freelancer_bid_id,
+      freelancer_id: freelancers[0].freelancer_id,
+      freelancer_name: freelancers[0].freelancer_name,
+    });
+  } catch (error) {
+    console.error("Error fetching freelancers:", error);
+    res.send({
+      status: "error",
+      message: "Server error",
+      data: [],
+    });
+  }
+});
+
+freelancerRouter.get("/get-total-completed-bid", async (req, res) => {
+  try {
+    const freelancers = await queryAsync(
+      "SELECT COUNT(*) as total_completed_bid FROM freelancer_bid WHERE freelancer_bid.current_status = 'completed' AND freelancer_bid.freelancer_id=?",
+      [req.query.freelancer_id]
+    );
+    res.send({
+      status: "success",
+      message: "Get total completed bid successfully",
+      total_completed_bid: freelancers[0].total_completed_bid,
+    });
+  } catch (error) {
+    console.error("Error fetching freelancers:", error);
+    res.send({
+      status: "error",
+      message: "Server error",
+      data: [],
+    });
+  }
+});
+
 module.exports = freelancerRouter;

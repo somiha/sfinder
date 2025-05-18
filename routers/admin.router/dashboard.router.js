@@ -4,6 +4,6 @@ const dashboardRouter = express.Router();
 const upload = require("../../config/multer");
 const isLogged = require("../../middlewares/isLogin");
 
-dashboardRouter.get("/dashboard", getDashboard);
+dashboardRouter.get("/dashboard", isLogged, getDashboard);
 
 module.exports = dashboardRouter;

@@ -9,9 +9,9 @@ const icRouter = express.Router();
 const upload = require("../../config/multer");
 const isLogged = require("../../middlewares/isLogin");
 
-icRouter.get("/ic", getIc);
-icRouter.post("/add-ic", upload.none(), addIc);
-icRouter.post("/edit-ic/:id", upload.none(), editIc);
-icRouter.get("/delete-ic/:id", upload.none(), deleteIc);
+icRouter.get("/ic", isLogged, getIc);
+icRouter.post("/add-ic", isLogged, upload.none(), addIc);
+icRouter.post("/edit-ic/:id", isLogged, upload.none(), editIc);
+icRouter.get("/delete-ic/:id", isLogged, upload.none(), deleteIc);
 
 module.exports = icRouter;

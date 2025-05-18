@@ -30,7 +30,7 @@ INNER JOIN division ON division.division_id = district.division_id;
     const division = await queryAsyncWithoutValue(query1);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 10;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const totalDistricts = result.length;
     const totalPages = Math.ceil(totalDistricts / perPage);

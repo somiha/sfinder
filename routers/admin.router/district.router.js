@@ -9,9 +9,14 @@ const districtRouter = express.Router();
 const upload = require("../../config/multer");
 const isLogged = require("../../middlewares/isLogin");
 
-districtRouter.get("/district", getAllDistricts);
-districtRouter.post("/add-district", upload.none(), addDistrict);
-districtRouter.post("/edit-district/:id", upload.none(), editDistrict);
-districtRouter.get("/delete-district/:id", deleteDistrict);
+districtRouter.get("/district", isLogged, getAllDistricts);
+districtRouter.post("/add-district", isLogged, upload.none(), addDistrict);
+districtRouter.post(
+  "/edit-district/:id",
+  isLogged,
+  upload.none(),
+  editDistrict
+);
+districtRouter.get("/delete-district/:id", isLogged, deleteDistrict);
 
 module.exports = districtRouter;

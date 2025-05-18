@@ -60,7 +60,7 @@ exports.getMessage = async (req, res) => {
     const unseenCount = unseenCountResult[0].unseen_count;
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 10;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
 
     const paginatedMessages = messages.slice(startIdx, startIdx + perPage);

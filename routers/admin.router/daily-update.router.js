@@ -9,11 +9,17 @@ const dailyUpdateRouter = express.Router();
 const upload = require("../../config/multer");
 const isLogged = require("../../middlewares/isLogin");
 
-dailyUpdateRouter.get("/daily-update", getdailyUpdate);
-dailyUpdateRouter.post("/add-daily-update", upload.none(), addDailyUpdate);
-dailyUpdateRouter.get("/delete-daily-update/:id", deleteDailyUpdate);
+dailyUpdateRouter.get("/daily-update", isLogged, getdailyUpdate);
+dailyUpdateRouter.post(
+  "/add-daily-update",
+  isLogged,
+  upload.none(),
+  addDailyUpdate
+);
+dailyUpdateRouter.get("/delete-daily-update/:id", isLogged, deleteDailyUpdate);
 dailyUpdateRouter.post(
   "/edit-daily-update/:id",
+  isLogged,
   upload.none(),
   editDailyUpdate
 );

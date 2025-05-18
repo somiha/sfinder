@@ -4,6 +4,26 @@ const upload = require("../../config/multer");
 const bcrypt = require("bcrypt");
 const db = require("../../config/database");
 
+function queryAsyncWithoutValue(query) {
+  return new Promise((resolve, reject) => {
+    db.query(query, (err, result) => {
+      if (err) reject(err);
+      else resolve(result);
+    });
+  });
+}
+
+function queryAsync(query, values) {
+  return new Promise((resolve, reject) => {
+    db.query(query, values, (err, result) => {
+      if (err) {
+        console.log(err);
+        reject(err);
+      } else resolve(result);
+    });
+  });
+}
+
 userRouter.post("/file-request", upload.none(), (req, res) => {
   let user_id = req.query.user_id;
   let heading = req.body.heading;
@@ -378,6 +398,46 @@ userRouter.post(
   }
 );
 
+// userRouter.post("/user-reset", upload.none(), (req, res) => {
+//   let email = req.query.email;
+//   let device_id = req.body.device_id;
+
+//   db.query(
+//     "SELECT * FROM user WHERE user_email=?",
+//     [email],
+//     (error, result) => {
+//       if (!error) {
+//         if (result.length > 0) {
+//           let user_id = result[0].user_id;
+//           db.query(
+//             "INSERT INTO user_reset(user_id,device_id) VALUES(?,?)",
+//             [user_id, device_id],
+//             (error1, result1) => {
+//               if (!error1) {
+//                 res.send({
+//                   status: "success",
+//                   message: "Apply for user reset successfully",
+//                   data: [],
+//                 });
+//               } else {
+//                 res.send(error1);
+//               }
+//             }
+//           );
+//         } else {
+//           res.send({
+//             status: "failed",
+//             message: "No user found with this email address",
+//             data: [],
+//           });
+//         }
+//       } else {
+//         res.send(error);
+//       }
+//     }
+//   );
+// });
+
 userRouter.post("/user-reset", upload.none(), (req, res) => {
   let email = req.query.email;
   let device_id = req.body.device_id;
@@ -386,36 +446,90 @@ userRouter.post("/user-reset", upload.none(), (req, res) => {
     "SELECT * FROM user WHERE user_email=?",
     [email],
     (error, result) => {
-      if (!error) {
-        if (result.length > 0) {
-          let user_id = result[0].user_id;
+      if (error) return res.send(error);
+
+      if (result.length === 0) {
+        return res.send({
+          status: "failed",
+          message: "No user found with this email address",
+          data: [],
+        });
+      }
+
+      let user_id = result[0].user_id;
+
+      // Check if user already requested a reset with the same device
+      db.query(
+        "SELECT * FROM user_reset WHERE user_id = ? AND device_id = ? AND status = 0",
+        [user_id, device_id],
+        (checkError, checkResult) => {
+          if (checkError) return res.send(checkError);
+
+          if (checkResult.length > 0) {
+            return res.send({
+              status: "exists",
+              message: "User reset already requested from this device",
+              data: [],
+            });
+          }
+
+          // Proceed with insert if no previous reset request found
           db.query(
-            "INSERT INTO user_reset(user_id,device_id) VALUES(?,?)",
+            "INSERT INTO user_reset(user_id, device_id) VALUES(?, ?)",
             [user_id, device_id],
-            (error1, result1) => {
-              if (!error1) {
-                res.send({
-                  status: "success",
-                  message: "Apply for user reset successfully",
-                  data: [],
-                });
-              } else {
-                res.send(error1);
-              }
+            (insertError, insertResult) => {
+              if (insertError) return res.send(insertError);
+
+              res.send({
+                status: "success",
+                message: "Applied for user reset successfully",
+                data: [],
+              });
             }
           );
-        } else {
-          res.send({
-            status: "failed",
-            message: "No user found with this email address",
-            data: [],
-          });
         }
-      } else {
-        res.send(error);
-      }
+      );
     }
   );
 });
+
+userRouter.get(
+  "/delete-all-subscription-overed-users",
+  upload.none(),
+  async (req, res) => {
+    try {
+      const query = `DELETE FROM package_enrollment WHERE created_at < NOW() - INTERVAL 1 YEAR`;
+
+      await queryAsync(query);
+
+      res.json({
+        status: "success",
+        message: "Remove subscription overed user successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(503).json({ msg: "Internal Server Error" });
+    }
+  }
+);
+
+userRouter.get(
+  "/delete-one-year-overed-verified-users",
+  upload.none(),
+  async (req, res) => {
+    try {
+      const query = `UPDATE user SET user_verification = 0, last_verification_date = NULL WHERE last_verification_date < NOW() - INTERVAL 1 YEAR AND user_verification = 1`;
+
+      await queryAsync(query);
+      res.json({
+        status: "success",
+        message: "Remove one year overed verified user successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(503).json({ msg: "Internal Server Error" });
+    }
+  }
+);
 
 module.exports = userRouter;

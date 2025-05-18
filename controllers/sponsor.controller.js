@@ -27,7 +27,7 @@ exports.getPlan = async (req, res) => {
     const plan = await queryAsyncWithoutValue(planQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = plan.slice(startIdx, startIdx + perPage);
 
@@ -112,7 +112,7 @@ exports.getPlanDetail = async (req, res) => {
     }));
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = planWithLocalTime.slice(startIdx, startIdx + perPage);
 

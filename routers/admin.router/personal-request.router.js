@@ -3,6 +3,7 @@ const {
   getPersonalRequest,
   deletePersonalRequest,
   changeStauts,
+  deleteSelectedRequest,
 } = require("../../controllers/personal-request.controller");
 const personalRequestRouter = express.Router();
 const upload = require("../../config/multer");
@@ -18,5 +19,5 @@ personalRequestRouter.post(
   upload.none(),
   changeStauts
 );
-
+personalRequestRouter.post("/delete-selected-request", deleteSelectedRequest);
 module.exports = personalRequestRouter;

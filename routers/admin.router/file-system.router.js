@@ -25,33 +25,74 @@ const fileSystemRouter = express.Router();
 const upload = require("../../config/multer");
 const isLogged = require("../../middlewares/isLogin");
 
-fileSystemRouter.get("/file-system", getFileSystem);
+fileSystemRouter.get("/file-system", isLogged, getFileSystem);
 fileSystemRouter.post(
   "/add-mobile-company",
+  isLogged,
   upload.single("mobile_company_image"),
   addMobileCompany
 );
 fileSystemRouter.post(
   "/edit-mobile-company/:id",
+  isLogged,
   upload.single("mobile_company_image"),
   editMobileCompany
 );
-fileSystemRouter.get("/delete-mobile-company/:id", deleteMobileCompany);
-fileSystemRouter.get("/main-folder/:id", getMainFolder);
-fileSystemRouter.post("/add-main-folder", upload.none(), addMainFolder);
-fileSystemRouter.post("/edit-main-folder/:id", upload.none(), editMainFolder);
-fileSystemRouter.get("/delete-main-folder", deleteMainFolder);
-fileSystemRouter.get("/sub-folder/:id", getSubFolder);
-fileSystemRouter.post("/add-sub-folder/:id", upload.none(), addSubFolder);
-fileSystemRouter.post("/edit-sub-folder", upload.none(), editSubFolder);
-fileSystemRouter.get("/delete-sub-folder", deleteSubFolder);
-fileSystemRouter.get("/extra-folder/:id", getExtraFolder);
-fileSystemRouter.post("/add-extra-folder/:id", upload.none(), addExtraFolder);
-fileSystemRouter.post("/edit-extra-folder", upload.none(), editExtraFolder);
-fileSystemRouter.get("/delete-extra-folder", deleteExtraFolder);
-fileSystemRouter.get("/files/:id", getFiles);
-fileSystemRouter.post("/add-file/:id", upload.single("file"), addFile);
-fileSystemRouter.post("/edit-file", upload.single("file"), editFile);
-fileSystemRouter.get("/delete-file", deleteFile);
+fileSystemRouter.get(
+  "/delete-mobile-company/:id",
+  isLogged,
+  deleteMobileCompany
+);
+fileSystemRouter.get("/main-folder/:id", isLogged, getMainFolder);
+fileSystemRouter.post(
+  "/add-main-folder",
+  isLogged,
+  upload.none(),
+  addMainFolder
+);
+fileSystemRouter.post(
+  "/edit-main-folder/:id",
+  isLogged,
+  upload.none(),
+  editMainFolder
+);
+fileSystemRouter.get("/delete-main-folder", isLogged, deleteMainFolder);
+fileSystemRouter.get("/sub-folder/:id", isLogged, getSubFolder);
+fileSystemRouter.post(
+  "/add-sub-folder/:id",
+  isLogged,
+  upload.none(),
+  addSubFolder
+);
+fileSystemRouter.post(
+  "/edit-sub-folder",
+  isLogged,
+  upload.none(),
+  editSubFolder
+);
+fileSystemRouter.get("/delete-sub-folder", isLogged, deleteSubFolder);
+fileSystemRouter.get("/extra-folder/:id", isLogged, getExtraFolder);
+fileSystemRouter.post(
+  "/add-extra-folder/:id",
+  isLogged,
+  upload.none(),
+  addExtraFolder
+);
+fileSystemRouter.post(
+  "/edit-extra-folder",
+  isLogged,
+  upload.none(),
+  editExtraFolder
+);
+fileSystemRouter.get("/delete-extra-folder", isLogged, deleteExtraFolder);
+fileSystemRouter.get("/files/:id", isLogged, getFiles);
+fileSystemRouter.post(
+  "/add-file/:id",
+  isLogged,
+  upload.single("file"),
+  addFile
+);
+fileSystemRouter.post("/edit-file", isLogged, upload.single("file"), editFile);
+fileSystemRouter.get("/delete-file", isLogged, deleteFile);
 
 module.exports = fileSystemRouter;

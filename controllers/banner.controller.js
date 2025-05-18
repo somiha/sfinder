@@ -34,7 +34,7 @@ exports.getBanner = async (req, res) => {
     const banners = await queryAsyncWithoutValue(bannerQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = banners.slice(startIdx, startIdx + perPage);
 

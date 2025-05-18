@@ -157,9 +157,20 @@ sponsorRouter.post("/update-plan", async (req, res) => {
     plan_id,
     sponsor_plan_id,
   ]);
+  const getPlan = `SELECT * FROM sponsor_plan WHERE id = ?`;
+
+  const getPlanResult = await queryAsync(getPlan, [plan_id]);
+
+  console.log(getPlanResult);
 
   if (updatePlanResult.affectedRows > 0) {
-    return res.status(200).json({ status: "success", msg: "Plan updated" });
+    return res.status(200).json({
+      status: "success",
+      msg: "Plan updated",
+      plan_name: getPlanResult[0].name,
+      plan_price: getPlanResult[0].price,
+      sponsor_plan_id: sponsor_plan_id,
+    });
   } else {
     return res.status(404).json({ status: "failed", msg: "Plan not found" });
   }

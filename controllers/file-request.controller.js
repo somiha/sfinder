@@ -50,7 +50,7 @@ exports.getFileRequest = async (req, res) => {
     const fileRequest = await queryAsyncWithoutValue(fileRequestQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 10;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = fileRequest.slice(startIdx, startIdx + perPage);
 

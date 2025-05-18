@@ -37,7 +37,7 @@ LEFT JOIN user_report ON freelancer.user_id = user_report.user_id;
     const freelancers = await queryAsyncWithoutValue(freelancerQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancers.slice(startIdx, startIdx + perPage);
 
@@ -68,7 +68,7 @@ WHERE freelancer_acc_status = 4;
     const freelancers = await queryAsyncWithoutValue(freelancerQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancers.slice(startIdx, startIdx + perPage);
 
@@ -102,7 +102,7 @@ WHERE freelancer_acc_status = 4;
     const freelancer = await queryAsyncWithoutValue(searchFreelancerQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancer.slice(startIdx, startIdx + perPage);
 
@@ -211,7 +211,24 @@ exports.getFreelancerInfo = (req, res) => {
 
 exports.getFreelancerEnrollment = async (req, res) => {
   try {
-    const getFreelancerEnrollmentQuery = `
+    const status = req.query.status;
+
+    let freelancerEnrollment = [];
+    if (status) {
+      const getFreelancerEnrollmentQuery = `
+      SELECT 
+        freelancer_enrollment.*,
+        freelancer.freelancer_id,
+        freelancer.freelancer_name
+      FROM freelancer_enrollment
+      INNER JOIN freelancer ON freelancer_enrollment.freelancer_id = freelancer.freelancer_id
+      WHERE freelancer_enrollment.status = ${status}
+    `;
+      freelancerEnrollment = await queryAsync(getFreelancerEnrollmentQuery, [
+        status,
+      ]);
+    } else {
+      const getFreelancerEnrollmentQuery = `
       SELECT 
         freelancer_enrollment.*,
         freelancer.freelancer_id,
@@ -220,13 +237,13 @@ exports.getFreelancerEnrollment = async (req, res) => {
       INNER JOIN freelancer ON freelancer_enrollment.freelancer_id = freelancer.freelancer_id
       WHERE freelancer.freelancer_acc_status != -1
     `;
-
-    const freelancerEnrollment = await queryAsyncWithoutValue(
-      getFreelancerEnrollmentQuery
-    );
+      freelancerEnrollment = await queryAsyncWithoutValue(
+        getFreelancerEnrollmentQuery
+      );
+    }
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancerEnrollment.slice(startIdx, startIdx + perPage);
 
@@ -241,6 +258,19 @@ exports.getFreelancerEnrollment = async (req, res) => {
     console.log(error);
     return res.status(503).json({ msg: "Internal Server Error" });
   }
+};
+
+exports.filtering = (req, res) => {
+  let filtering_option = req.body.filtering_option;
+  console.log(filtering_option);
+
+  if (filtering_option) {
+    return res.redirect(
+      "/admin/freelancer-enrollment?status=" + filtering_option
+    );
+  }
+
+  return res.redirect("/admin/freelancer-enrollment");
 };
 
 // exports.getFreelancerWithdraw = (req, res) => {
@@ -279,7 +309,7 @@ exports.getFreelancerWithdraw = async (req, res) => {
     }
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancerWithdraw.slice(startIdx, startIdx + perPage);
 
@@ -349,7 +379,7 @@ LEFT JOIN user_report ON freelancer.user_id = user_report.user_id
     const freelancer = await queryAsync(searchFreelancerQuery, [freelancerId]);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancer.slice(startIdx, startIdx + perPage);
 
@@ -387,7 +417,7 @@ exports.searchFreelancerEnrollment = async (req, res) => {
     );
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancerEnrollment.slice(startIdx, startIdx + perPage);
 
@@ -424,7 +454,7 @@ exports.searchFreelancerWithdraw = async (req, res) => {
     ]);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancerWithdraw.slice(startIdx, startIdx + perPage);
 
@@ -465,7 +495,7 @@ exports.getFreelancerPending = async (req, res) => {
     const freelancerPending = await queryAsync(getFreelancerPendingQuery, [-1]);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancerPending.slice(startIdx, startIdx + perPage);
 
@@ -498,7 +528,7 @@ exports.searchFreelancerPending = async (req, res) => {
     ]);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = freelancerPending.slice(startIdx, startIdx + perPage);
 
@@ -585,7 +615,7 @@ exports.changeFreelancerStatus = async (req, res) => {
         if (status == -1) {
           res.redirect("/admin/freelancer-pending");
         } else {
-          res.redirect("/admin/freelancer");
+          res.redirect("/admin/freelancer-pending");
         }
       } else {
         res.send(error);
@@ -672,7 +702,7 @@ exports.getExpiredVerificationFreelancers = async (req, res) => {
     );
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = expiredFreelancers.slice(startIdx, startIdx + perPage);
 
@@ -709,7 +739,7 @@ exports.searchExpiredFreelancers = async (req, res) => {
     ]);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = expiredFreelancers.slice(startIdx, startIdx + perPage);
 
@@ -802,7 +832,7 @@ exports.cancel_bid = async (req, res) => {
     const cancelBid = await queryAsync(cancelBidQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = cancelBid.slice(startIdx, startIdx + perPage);
 
@@ -826,7 +856,7 @@ exports.bid_info = async (req, res) => {
     const bid = await queryAsync(bidQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = bid.slice(startIdx, startIdx + perPage);
 
@@ -867,6 +897,58 @@ exports.delete_bid = async (req, res) => {
     return res.redirect("/admin/bid-info");
   } catch (error) {
     console.error(error);
+    return res.status(503).json({ msg: "Internal Server Error" });
+  }
+};
+
+exports.searchBid = async (req, res) => {
+  try {
+    const search = req.body.search;
+    const query = `SELECT fb.*, f.freelancer_name, u.user_name FROM freelancer_bid as fb left join freelancer as f on fb.freelancer_id = f.freelancer_id left join user as u on fb.user_id = u.user_id WHERE fb.freelancer_bid_id = ?`;
+
+    const bid = await queryAsync(query, [search]);
+    console.log(bid);
+
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 15;
+    const startIdx = (page - 1) * perPage;
+    const paginated = bid.slice(startIdx, startIdx + perPage);
+
+    return res.status(200).render("bid-info1", {
+      title: "Bid Info",
+      bid: bid,
+      paginated,
+      perPage,
+      page,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(503).json({ msg: "Internal Server Error" });
+  }
+};
+
+exports.searchCancelBid = async (req, res) => {
+  try {
+    const search = req.body.search;
+    const query = `SELECT fb.*, cb.reason, f.freelancer_name, u.user_name   FROM freelancer_bid as fb left join cancel_bid as cb on fb.freelancer_bid_id = cb.bid_id left join freelancer as f on fb.freelancer_id = f.freelancer_id left join user as u on fb.user_id = u.user_id WHERE fb.is_cancel_request = 1 AND fb.is_paid = 1 AND fb.is_done = 0 AND fb.freelancer_bid_id = ?`;
+
+    const cancelBid = await queryAsync(query, [search]);
+    console.log(cancelBid);
+
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 15;
+    const startIdx = (page - 1) * perPage;
+    const paginated = cancelBid.slice(startIdx, startIdx + perPage);
+
+    return res.status(200).render("bid-info", {
+      title: "Cancel Bid Info",
+      cancelBid: cancelBid,
+      paginated,
+      perPage,
+      page,
+    });
+  } catch (error) {
+    console.log(error);
     return res.status(503).json({ msg: "Internal Server Error" });
   }
 };

@@ -17,7 +17,7 @@ exports.getdailyUpdate = async (req, res) => {
     const dailyUpdates = await queryAsyncWithoutValue(dailyUpdateQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
 
     const paginatedUpdates = dailyUpdates.slice(startIdx, startIdx + perPage);

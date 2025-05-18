@@ -4,7 +4,7 @@ exports.getOrder = async (req, res) => {
   const order_id = req.query.order_id;
   const status = req.query.status;
   const page = parseInt(req.query.page) || 1;
-  const perPage = 8;
+  const perPage = 15;
   const startIdx = (page - 1) * perPage;
   let result = [];
   if (order_id && status) {
@@ -69,14 +69,22 @@ exports.getOrderDetails = (req, res) => {
           "SELECT order_details.product_id,order_details.product_quantity,order_details.product_total_price,main_product.product_name,main_product.product_image_url FROM order_details INNER JOIN main_product ON main_product.main_product_id=order_details.product_id WHERE order_details.order_id=?",
           [order_id],
           (error1, result1) => {
-            if (!error1) {
-              res.render("order-details", {
-                order_details: result,
-                order_info: result1,
-              });
-            } else {
-              res.send(error1);
-            }
+            db.query(
+              "SELECT * FROM order_user_note WHERE order_id=?",
+              [order_id],
+              (error2, result2) => {
+                console.log({ result2 });
+                if (!error2) {
+                  res.render("order-details", {
+                    order_details: result,
+                    order_info: result1,
+                    order_user_note: result2,
+                  });
+                } else {
+                  res.send(error2);
+                }
+              }
+            );
           }
         );
       } else {

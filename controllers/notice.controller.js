@@ -37,7 +37,7 @@ exports.getNotice = async (req, res) => {
     const notice = await queryAsyncWithoutValue(noticeQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = notice.slice(startIdx, startIdx + perPage);
 

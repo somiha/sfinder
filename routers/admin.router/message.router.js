@@ -8,10 +8,11 @@ const messageRouter = express.Router();
 const upload = require("../../config/multer");
 const isLogged = require("../../middlewares/isLogin");
 
-messageRouter.get("/message", getMessage);
-messageRouter.get("/delete-message/:id", deleteMessage);
+messageRouter.get("/message", isLogged, getMessage);
+messageRouter.get("/delete-message/:id", isLogged, deleteMessage);
 messageRouter.post(
   "/change-message-status",
+  isLogged,
   upload.none(),
   changeMessageStatus
 );

@@ -1,15 +1,5 @@
 const db = require("../config/database");
 
-// exports.getUser = (req, res) => {
-//   db.query("SELECT * FROM user", (error, result) => {
-//     if (!error) {
-//       res.render("user", { user: result });
-//     } else {
-//       res.send(error);
-//     }
-//   });
-// };
-
 function queryAsync(query, values) {
   return new Promise((resolve, reject) => {
     db.query(query, values, (err, result) => {
@@ -36,7 +26,7 @@ exports.getUser = async (req, res) => {
     const user = await queryAsyncWithoutValue(userQuery);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = user.slice(startIdx, startIdx + perPage);
 
@@ -85,19 +75,6 @@ exports.changeUserVerification = (req, res) => {
     }
   );
 };
-
-// exports.getUserReport = (req, res) => {
-//   db.query(
-//     "SELECT * FROM user_report INNER JOIN user ON user.user_id=user_report.user_id",
-//     (error, result) => {
-//       if (!error) {
-//         res.render("user-report", { user_report: result });
-//       } else {
-//         res.send(error);
-//       }
-//     }
-//   );
-// };
 
 exports.getUserReport = (req, res) => {
   const userId = req.query.user_id;
@@ -195,27 +172,70 @@ exports.deleteUserReport = (req, res) => {
   );
 };
 
-exports.getUserReset = (req, res) => {
-  db.query(
-    "SELECT * FROM user_reset INNER JOIN user ON user.user_id=user_reset.user_id ORDER BY user_reset.status",
-    (error, result) => {
-      if (!error) {
-        res.render("user-reset", { user_reset: result });
-      } else {
-        res.send(error);
-      }
-    }
-  );
+// exports.getUserReset = (req, res) => {
+
+//   db.query(
+//     "SELECT * FROM user_reset INNER JOIN user ON user.user_id=user_reset.user_id ORDER BY user_reset.status",
+//     (error, result) => {
+//       if (!error) {
+//         res.render("user-reset", { user_reset: result });
+//       } else {
+//         res.send(error);
+//       }
+//     }
+//   );
+// };
+
+exports.getUserReset = async (req, res) => {
+  try {
+    const query = `
+      SELECT * 
+      FROM user_reset 
+      INNER JOIN user ON user.user_id = user_reset.user_id 
+      WHERE user_reset.status = 0
+    `;
+    result = await queryAsyncWithoutValue(query);
+
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 15;
+    const startIdx = (page - 1) * perPage;
+
+    const paginated = result.slice(startIdx, startIdx + perPage);
+
+    return res.status(200).render("user-reset", {
+      title: "User Reset",
+      user_reset: result,
+      paginated,
+      perPage,
+      page,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(503).json({ msg: "Internal Server Error" });
+  }
+};
+exports.filtering = (req, res) => {
+  let filtering_option = req.body.filtering_option;
+  if (filtering_option) {
+    return res.redirect("/admin/user-reset?status=" + filtering_option);
+  }
+
+  return res.redirect("/admin/user-reset");
 };
 
 exports.changeUserResetOption = (req, res) => {
   let user_reset_id = req.params.id;
   let user_reset_status = req.body.user_reset_status;
 
+  console.log(req.body);
+
+  console.log("reset", user_reset_id, user_reset_status);
+
   db.query(
     "UPDATE user_reset SET status=? WHERE user_reset_id=?",
     [user_reset_status, user_reset_id],
     (error, result) => {
+      console.log(result);
       if (!error) {
         db.query(
           "SELECT * FROM user_reset WHERE user_reset_id=?",
@@ -286,7 +306,7 @@ exports.searchUser = async (req, res) => {
     const user = await queryAsync(userQuery, [search_user]);
 
     const page = parseInt(req.query.page) || 1;
-    const perPage = 8;
+    const perPage = 15;
     const startIdx = (page - 1) * perPage;
     const paginated = user.slice(startIdx, startIdx + perPage);
 
@@ -357,4 +377,122 @@ exports.unverifyUser = (req, res) => {
       }
     }
   );
+};
+
+exports.deleteSelectedUsers = async (req, res) => {
+  try {
+    const selectedUsers = req.body.selectedUsers;
+
+    if (!selectedUsers || !Array.isArray(selectedUsers)) {
+      return res.status(400).json({ msg: "No users selected" });
+    }
+
+    // Convert user IDs to integers for safety
+    const userIds = selectedUsers
+      .map((id) => parseInt(id))
+      .filter((id) => !isNaN(id));
+
+    if (userIds.length === 0) {
+      return res.status(400).json({ msg: "No valid user IDs provided" });
+    }
+
+    // Delete users in a single query
+    const deleteQuery = `DELETE FROM user WHERE user_id IN (?)`;
+    await queryAsync(deleteQuery, [userIds]);
+
+    req.flash("success", `${userIds.length} user(s) deleted successfully`);
+    return res.redirect("/admin/user");
+  } catch (error) {
+    console.log(error);
+
+    return res.redirect("/admin/user");
+  }
+};
+
+exports.searchUserReport = async (req, res) => {
+  try {
+    const search_user = req.body.search_user;
+    const userQuery = `SELECT * FROM user_report INNER JOIN user ON user.user_id=user_report.user_id WHERE user_email=?`;
+
+    const user_report = await queryAsync(userQuery, [search_user]);
+
+    // const page = parseInt(req.query.page) || 1;
+    // const perPage = 15;
+    // const startIdx = (page - 1) * perPage;
+    // const paginated = user.slice(startIdx, startIdx + perPage);
+
+    return res.status(200).render("user-report", {
+      title: "User Report List",
+      user_report,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(503).json({ msg: "Internal Server Error" });
+  }
+};
+
+exports.searchUserReset = async (req, res) => {
+  try {
+    const search_user = req.body.search_user;
+    const userQuery = `SELECT * FROM user_reset INNER JOIN user ON user.user_id=user_reset.user_id WHERE user_email=? AND user_reset.status=0`;
+
+    const user_reset = await queryAsync(userQuery, [search_user]);
+
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 15;
+    const startIdx = (page - 1) * perPage;
+    const paginated = user.slice(startIdx, startIdx + perPage);
+
+    return res.status(200).render("user-reset", {
+      title: "User Reset List",
+      user_reset,
+      paginated,
+      perPage,
+      page,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(503).json({ msg: "Internal Server Error" });
+  }
+};
+
+exports.resetUsers = async (req, res) => {
+  try {
+    let { actionType, selectedResets } = req.body;
+
+    // Convert single selection to array
+    if (selectedResets && !Array.isArray(selectedResets)) {
+      selectedResets = [selectedResets];
+    }
+
+    if (!actionType || !selectedResets) {
+      return res.redirect("/admin/user-reset");
+    }
+
+    if (selectedResets.length === 0) {
+      return res.redirect("/admin/user-reset");
+    }
+
+    if (actionType === "approve") {
+      const placeholders = selectedResets.map(() => "?").join(",");
+      const query = `UPDATE user_reset SET status = 1 WHERE user_reset_id IN (${placeholders})`;
+      await queryAsync(query, selectedResets);
+      const getDeviceIdQuery = `SELECT device_id, user_id FROM user_reset WHERE user_reset_id IN (${placeholders})`;
+      const deviceIds = await queryAsync(getDeviceIdQuery, selectedResets);
+      const updateDeviceIdQuery = `UPDATE user SET device_id = ? WHERE user_id = ?`;
+      const values = deviceIds
+        .map((deviceId) => [deviceId.device_id, deviceId.user_id])
+        .flat();
+      await queryAsync(updateDeviceIdQuery, values);
+    } else if (actionType === "delete") {
+      const placeholders = selectedResets.map(() => "?").join(",");
+      const query = `DELETE FROM user_reset WHERE user_reset_id IN (${placeholders})`;
+      await queryAsync(query, selectedResets);
+    }
+
+    return res.redirect("/admin/user-reset");
+  } catch (error) {
+    console.error("Error in ResetUsers:", error);
+    return res.redirect("/admin/user-reset");
+  }
 };
